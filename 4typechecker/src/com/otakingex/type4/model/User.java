@@ -1,8 +1,6 @@
 package com.otakingex.type4.model;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 public class User implements Serializable {
 
