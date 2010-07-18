@@ -8,9 +8,33 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>entry</servlet-name>
 		<servlet-class>com.otakingex.type4.EntryServlet</servlet-class>
 	</servlet>
+ 	<servlet>
+		<servlet-name>workout</servlet-name>
+		<servlet-class>com.otakingex.type4.WorkoutServlet</servlet-class>
+	</servlet>
+ 	<servlet>
+		<servlet-name>summary</servlet-name>
+		<servlet-class>com.otakingex.type4.SummaryServlet</servlet-class>
+	</servlet>
+ 	<servlet>
+		<servlet-name>option</servlet-name>
+		<servlet-class>com.otakingex.type4.OptionWorkoutServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>entry</servlet-name>
 		<url-pattern>/entry</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>workout</servlet-name>
+		<url-pattern>/workout</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>summary</servlet-name>
+		<url-pattern>/summary</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>option</servlet-name>
+		<url-pattern>/option</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>01entry.jsp</welcome-file>

@@ -6,13 +6,17 @@
 <%@ page import="com.otakingex.type4.control.Utils" %>
 <%@ page import="com.otakingex.type4.ViewConstants" %>
 <%@ page import="com.otakingex.type4.model.Question" %>
+<%
+	Boolean isLastTest = (Boolean)request.getAttribute(ViewConstants.REQ_ATTRKEY_SENDSUMMARY);
+	String action = (isLastTest.booleanValue())?"/summary":"/workout";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link type="text/css" rel="stylesheet" href="/css/base.css">
 	<link type="text/css" rel="stylesheet" href="/css/tables.css">
-	<link rel="shortcut icon" href="/images/favicon.ico">
+	<link rel="shortcut icon" href="/favicon.ico">
 	<title>オタキングex 4タイプ簡易判定サイト</title>
 </head>
 <body>
@@ -22,15 +26,16 @@
 	以下の質問に回答し、次へボタンを押してください。
 	</p>
 
-	<form method="POST" action="/workout">
+	<form method="POST" action="<%=action %>">
 	
 		<!-- 向性テスト -->
 <%
-	Object o = 
-		request.getAttribute(
+	List<Question> tropism = 
+		(List<Question>)request.getAttribute(
 				ViewConstants.REQ_ATTRKEY_TROPISM_LIST);
-	if(o intanceof List<Question> && ().size()>0){
+	if(tropism!=null && tropism.size()>0){
 %>
+	<center>
 	<table style="border-style:solid; border-width:1px; border-color:#919191; width:500px; ">
 	<tbody>
 <%
@@ -54,7 +59,7 @@
 %>
 			<tr>
 			<td>
-			<input type="radio" name="<%= q.getRequestKey() %>" value="<%= value %>"><%= answer %>
+			<input type="radio" name="<%=Utils.getRequestKey(ViewConstants.REQ_KEY_QUESTION_TEST1, q.getId(), q.getOrder(), q.isForward()) %>" value="<%= value %>" <%=(value==0)?"checked":"" %>><%= answer %>
 			</td>
 			</tr>
 <%
@@ -64,6 +69,7 @@
 %>
 	</tbody>
 	</table>
+	</center>
 	<br></br>
 	<br></br>
 <%
@@ -72,11 +78,11 @@
 
 		<!-- 王様・軍人テスト -->
 <%
-	List<Question> kingSold = 
-		(List<Question>)request.getAttribute(
+	List<Question> kingSold = (List<Question>)request.getAttribute(
 				ViewConstants.REQ_ATTRKEY_KINGSOLD_LIST);
-	if(kingSold.size()>0){
+	if(kingSold!=null && kingSold.size()>0){
 %>
+	<center>
 	<table style="border-style:solid; border-width:1px; border-color:#919191; width:500px; ">
 	<tbody>
 <%
@@ -100,7 +106,7 @@
 %>
 			<tr>
 			<td>
-			<input type="radio" name="<%= q.getRequestKey() %>" value="<%= value %>"><%= answer %>
+			<input type="radio" name="<%= Utils.getRequestKey(ViewConstants.REQ_KEY_QUESTION_TEST2, q.getId(), q.getOrder(), q.isForward()) %>" value="<%= value %>" <%=(value==0)?"checked":"" %>><%= answer %>
 			</td>
 			</tr>
 <%
@@ -110,6 +116,7 @@
 %>
 	</tbody>
 	</table>
+	</center>
 	<br></br>
 	<br></br>
 <%
@@ -118,11 +125,10 @@
 
 		<!-- 学者・職人テスト -->
 <%
-	List<Question> schlCrft = 
-		(List<Question>)request.getAttribute(
-				ViewConstants.REQ_ATTRKEY_SCHLCRFT_LIST);
-	if(schlCrft.size()>0){
+	List<Question> schlCrft = (List<Question>)request.getAttribute(ViewConstants.REQ_ATTRKEY_SCHLCRFT_LIST);
+	if(schlCrft!=null && schlCrft.size()>0){
 %>
+	<center>
 	<table style="border-style:solid; border-width:1px; border-color:#919191; width:500px; ">
 	<tbody>
 <%
@@ -146,7 +152,7 @@
 %>
 			<tr>
 			<td>
-			<input type="radio" name="<%= q.getRequestKey() %>" value="<%= value %>"><%= answer %>
+			<input type="radio" name="<%= Utils.getRequestKey(ViewConstants.REQ_KEY_QUESTION_TEST3, q.getId(), q.getOrder(), q.isForward()) %>" value="<%= value %>" <%=(value==0)?"checked":"" %>><%= answer %>
 			</td>
 			</tr>
 <%
@@ -156,10 +162,13 @@
 %>
 	</tbody>
 	</table>
+	</center>
+	<br></br>
+	<br></br>
 <%
 	}
 %>
-
+	
 	<center>
 	<input type="submit" name="次へ"/><input type="reset" name="クリア"/>
 	</center>

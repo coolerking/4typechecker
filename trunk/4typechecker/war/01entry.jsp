@@ -12,17 +12,17 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link type="text/css" rel="stylesheet" href="/css/base.css">
 	<link type="text/css" rel="stylesheet" href="/css/tables.css">
-	<link rel="shortcut icon" href="/images/favicon.ico">
+	<link rel="shortcut icon" href="/favicon.ico">
 	<title>オタキングex 4タイプ簡易判定サイト</title>
 </head>
 <body>
 	<h1>4タイプ簡易判定サイト</h1>
-	<h2><%= request.getAttribute(ViewConstants.REQ_ATTRKEY_SUBTITLE) %></h2>
+	<h2> </h2>
 	<p align="center">
 	以下のフォームに記入し、開始ボタンを押してください。
 	</p>
 
-	<form method="POST" action="/test1">
+	<form method="POST" action="/workout">
 		<table align="center">
 		<tbody>
 
@@ -44,14 +44,11 @@
 		</td>
 		</tr>
 
-		<tr>
-		<th style="font-weight:bold;" class="nobg">
-		<center><input type="submit" value="開始"><input type="reset" value="クリア"></center>
-		</th>
-		</tr>
-
 		</tbody>
 		</table>
+<br>
+<center><input type="submit" value="開始"><input type="reset" value="クリア"></center>
+
 	</form>
 
 	<p align="center">
