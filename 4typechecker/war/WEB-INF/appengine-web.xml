@@ -7,7 +7,7 @@
 	<system-properties>
 		<property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
 		<!-- please change value when you want to change test master -->
-		<property name="type4.currentmaster" value="com.otakingex.type4.master.TestMaster20100712"/>
+		<property name="type4.currentmaster" value="com.otakingex.type4.master.TestMaster20100719"/>
 		<!-- comment out to deny store results -->
 		<property name="type4.store" value="true"/>
 		<!-- please comment out if no need to send each result -->
