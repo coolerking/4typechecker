@@ -17,10 +17,10 @@
 	<link type="text/css" rel="stylesheet" href="/css/base.css">
 	<link type="text/css" rel="stylesheet" href="/css/tables.css">
 	<link rel="shortcut icon" href="/favicon.ico">
-	<title>オタキングex 4タイプ簡易判定サイト</title>
+	<title>オタキングex 4タイプ判定テスト</title>
 </head>
 <body>
-	<h1>4タイプ簡易判定サイト</h1>
+	<h1>4タイプ判定テスト</h1>
 	<h2><%= request.getAttribute(ViewConstants.REQ_ATTRKEY_SUBTITLE) %></h2>
 	<p align="center">
 	以下の質問に回答し、次へボタンを押してください。
@@ -76,7 +76,7 @@
 	}
 %>
 
-		<!-- 王様・軍人テスト -->
+		<!-- 注目型・司令型テスト -->
 <%
 	List<Question> kingSold = (List<Question>)request.getAttribute(
 				ViewConstants.REQ_ATTRKEY_KINGSOLD_LIST);
@@ -123,7 +123,7 @@
 	}
 %>
 
-		<!-- 学者・職人テスト -->
+		<!-- 法則型・理想型テスト -->
 <%
 	List<Question> schlCrft = (List<Question>)request.getAttribute(ViewConstants.REQ_ATTRKEY_SCHLCRFT_LIST);
 	if(schlCrft!=null && schlCrft.size()>0){
@@ -170,7 +170,7 @@
 %>
 	
 	<center>
-	<input type="submit" name="次へ"/><input type="reset" name="クリア"/>
+	<input type="submit" value="次へ"/><input type="reset" value="クリア"/>
 	</center>
 
 	<!-- hidden -->
@@ -193,6 +193,22 @@
 	}
 %>
 	</form>
+	
+	<br>
+	<p align="center">
+	各タイプの説明は、こちらをご参照ください。
+	</p>
+	
+	<p align="center">
+	<a href="http://www.amazon.co.jp/exec/obidos/ASIN/4023308838/otakingex01-22/">[Amazon]人生の法則 「欲求の4タイプ」で分かるあなたと他人</a>
+	<br>
+	[<a href="<%= ViewConstants.URL_KING %>">注目型</a>][<a href="<%= ViewConstants.URL_SOLD %>">司令型</a>][<a href="<%= ViewConstants.URL_SCHL %>">法則型</a>][<a href="<%= ViewConstants.URL_CRFT %>">理想型</a>]
+	<br>
+	<br>
+	<a href="http://www.youtube.com/watch?v=zFEYE9HYJUY">[Youtube]岡田斗司夫のひとり夜話(2010/11/6)#7</a>
+	<br>
+	<a href="http://otaking-ex.jp/wp/?page_id=5008">[オタキングex公式サイト]人間関係の特効薬　人生のトリセツ</a>
+	</p>
 
 
 </body>

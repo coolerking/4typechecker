@@ -20,6 +20,18 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>option</servlet-name>
 		<servlet-class>com.otakingex.type4.OptionWorkoutServlet</servlet-class>
 	</servlet>
+ 	<servlet>
+		<servlet-name>status</servlet-name>
+		<servlet-class>com.otakingex.type4.StatusServlet</servlet-class>
+	</servlet>
+ 	<servlet>
+		<servlet-name>estimate</servlet-name>
+		<servlet-class>com.otakingex.type4.EstimateServlet</servlet-class>
+	</servlet>
+	 	<servlet>
+		<servlet-name>message</servlet-name>
+		<servlet-class>com.otakingex.type4.MessageServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>entry</servlet-name>
 		<url-pattern>/entry</url-pattern>
@@ -35,6 +47,18 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 		<servlet-name>option</servlet-name>
 		<url-pattern>/option</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>status</servlet-name>
+		<url-pattern>/status</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>estimate</servlet-name>
+		<url-pattern>/estimate</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>message</servlet-name>
+		<url-pattern>/message</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>01entry.jsp</welcome-file>

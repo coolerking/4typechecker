@@ -10,16 +10,28 @@
 <link type="text/css" rel="stylesheet" href="css/base.css">
 <link type="text/css" rel="stylesheet" href="css/tables.css">
 <link rel="shortcut icon" href="/favicon.ico">
-<title>オタキングex 4タイプ簡易判定サイト</title>
+<title>オタキングex 4タイプ判定テスト</title>
 </head>
 <body>
-<h1>4タイプ簡易判定サイト</h1>
+<h1>4タイプ判定テスト</h1>
 
 <h2>ただいま、混み合っております</h2>
 
 <p align="center">
-しばらくお待ちいただいた後、再度実行してください。
+しばらくお待ちいただいた後、再度実行してください。<br>
+<br>
+お待たせして申し訳ありません。<br>
+もしよろしければ、以下のサイトも見ていただけるとうれしいです。<br>
+<a href="http://www.amazon.co.jp/exec/obidos/ASIN/4023308838/otakingex01-22/">[Amazon]人生の法則 「欲求の4タイプ」で分かるあなたと他人</a>
+<br>
+[<a href="<%= ViewConstants.URL_KING %>">注目型</a>][<a href="<%= ViewConstants.URL_SOLD %>">司令型</a>][<a href="<%= ViewConstants.URL_SCHL %>">法則型</a>][<a href="<%= ViewConstants.URL_CRFT %>">理想型</a>]
+<br>
+<br>
+<a href="http://www.youtube.com/watch?v=zFEYE9HYJUY">[Youtube]岡田斗司夫のひとり夜話(2010/11/6)#7</a>
+<br>
+<a href="http://otaking-ex.jp/wp/?page_id=5008">[オタキングex公式サイト]人間関係の特効薬　人生のトリセツ</a>
 </p>
+
 <form action="/entry" method="POST">
 	<!-- hidden -->
 <%

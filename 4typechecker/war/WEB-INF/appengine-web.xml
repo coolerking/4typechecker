@@ -7,11 +7,11 @@
 	<system-properties>
 		<property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
 		<!-- please change value when you want to change test master -->
-		<property name="type4.currentmaster" value="com.otakingex.type4.master.TestMaster20100719"/>
+		<property name="type4.currentmaster" value="com.otakingex.type4.master.TestMaster20110203"/>
 		<!-- comment out to deny store results -->
 		<property name="type4.store" value="true"/>
 		<!-- please comment out if no need to send each result -->
-		<property name="type4.store.mailaddress" value="4typechecker.ex@gmail.com"/>
+		<property name="type4.store.mailaddress" value="4typechecker.ex@gmail.com" />
 	</system-properties>
 	<static-files>
 		<include path="/css/*.css" />
@@ -19,7 +19,12 @@
  		<include path="/css/images/*.png" />
  		<include path="/css/images/*.gif" />
 		<include path="/images/*.png" />
+		<include path="/images/*.jpg" />
+		<include path="/images/*.jpeg" />
+		<include path="/images/*.gif" />
+		<include path="/js/*.js" />
 		<include path="/*.ico" />
-		<include path="/images/*jpg" />
+		<include path="/*.png" />
+		<include path="/*.html" />
 	</static-files>
 </appengine-web-app>

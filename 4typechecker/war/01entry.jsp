@@ -13,19 +13,19 @@
 	<link type="text/css" rel="stylesheet" href="/css/base.css">
 	<link type="text/css" rel="stylesheet" href="/css/tables.css">
 	<link rel="shortcut icon" href="/favicon.ico">
-	<title>オタキングex 4タイプ簡易判定サイト</title>
+	<title>オタキングex 4タイプ判定テスト</title>
 </head>
 <body>
-	<h1>4タイプ簡易判定サイト</h1>
+	<h1>4タイプ判定テスト</h1>
 	<h2> </h2>
 	<p align="center">
-	以下のフォームに記入し、開始ボタンを押してください。
+	開始ボタンを押してください。
 	</p>
 
 	<form method="POST" action="/workout">
+<!--
 		<table align="center">
 		<tbody>
-
 		<tr>
 		<td style="font-weight:bold;">
 		<div>名前：<input type="text" name="<%= ViewConstants.REQ_KEY_NAME %>" value="<%= user.getName() %>"></div>
@@ -47,15 +47,38 @@
 		</tbody>
 		</table>
 <br>
-<center><input type="submit" value="開始"><input type="reset" value="クリア"></center>
+-->
+		<input type="hidden" name="<%= ViewConstants.REQ_KEY_NAME %>" value="<%= user.getName() %>"></input>
+		<input type="hidden" name="<%= ViewConstants.REQ_KEY_AGE %>"  value="<%= user.getAge()==0?"":new Integer(user.getAge()).toString() %>"></input>
+		<input type="hidden" name="<%= ViewConstants.REQ_KEY_SEX %>" value="<%= ViewConstants.REQ_VALUE_SEX_MALE %>"></input>
+<center><input type="submit" value="開始"><!-- input type="reset" value="クリア" --></center>
 
 	</form>
-
+<!--
 	<p align="center">
 	<font size="-1">
 	※未記入でも判定できます（未入力のまま、開始ボタンを押してください）。
 	</font>
 	</p>
+-->
+<p align="center">
+各タイプの説明は、こちらをご参照ください。
+</p>
+<!--
+<p align="center">
+<a href="http://www.youtube.com/v/zFEYE9HYJUY&hl=ja_JP&feature=player_embedded&version=3">[Youtube]４タイプについての解説(王様=注目型、軍人=司令型、学者=法則型、職人=理想型)</a>
+</p>
+-->
+<p align="center">
+<a href="http://www.amazon.co.jp/exec/obidos/ASIN/4023308838/otakingex01-22/">[Amazon]人生の法則 「欲求の4タイプ」で分かるあなたと他人</a>
+<br>
+[<a href="<%= ViewConstants.URL_KING %>">注目型</a>][<a href="<%= ViewConstants.URL_SOLD %>">司令型</a>][<a href="<%= ViewConstants.URL_SCHL %>">法則型</a>][<a href="<%= ViewConstants.URL_CRFT %>">理想型</a>]
+<br>
+<br>
+<a href="http://www.youtube.com/watch?v=zFEYE9HYJUY">[Youtube]岡田斗司夫のひとり夜話(2010/11/6)#7</a>
+<br>
+<a href="http://otaking-ex.jp/wp/?page_id=5008">[オタキングex公式サイト]人間関係の特効薬　人生のトリセツ</a>
+</p>
 
 </body>
 </html>
