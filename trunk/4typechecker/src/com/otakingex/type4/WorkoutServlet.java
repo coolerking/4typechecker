@@ -16,6 +16,10 @@ public class WorkoutServlet extends BaseServlet {
 
 	private static final long serialVersionUID = -8524950581332082797L;
 	private Logger log = Logger.getLogger(getClass().getName());
+	
+	public void doGet(HttpServletRequest req, HttpServletResponse resp){
+		sendRedirect(JSP_NOLINK, req, resp);
+	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp){
 		try{

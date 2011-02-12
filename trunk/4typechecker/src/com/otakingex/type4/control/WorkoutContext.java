@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +15,7 @@ import com.otakingex.type4.ViewConstants;
 import com.otakingex.type4.master.TestMaster;
 import com.otakingex.type4.master.TestMasterManager;
 import com.otakingex.type4.model.Answer;
+import com.otakingex.type4.model.Count;
 import com.otakingex.type4.model.Question;
 import com.otakingex.type4.model.User;
 import com.otakingex.type4.store.BigTableStoreManager;
@@ -142,15 +144,15 @@ public class WorkoutContext implements ViewConstants{
 			List<String> answers = new LinkedList<String>();
 			if(q.isForward()){
 				answers.add(test1Array[q.getId()][1]);
-				answers.add("↑");
-				answers.add("どっちともいえない");
-				answers.add("↓");
+				answers.add(LABEL_ANSWER_2);
+				answers.add(LABEL_ANSWER_3);
+				answers.add(LABEL_ANSWER_4);
 				answers.add(test1Array[q.getId()][2]);
 			}else{
 				answers.add(test1Array[q.getId()][2]);
-				answers.add("↑");
-				answers.add("どっちともいえない");
-				answers.add("↓");
+				answers.add(LABEL_ANSWER_2);
+				answers.add(LABEL_ANSWER_3);
+				answers.add(LABEL_ANSWER_4);
 				answers.add(test1Array[q.getId()][1]);
 			}
 			q.setAnswers(answers);
@@ -189,15 +191,15 @@ public class WorkoutContext implements ViewConstants{
 			List<String> answers = new LinkedList<String>();
 			if(q.isForward()){
 				answers.add(test2Array[q.getId()][1]);
-				answers.add("↑");
-				answers.add("どっちともいえない");
-				answers.add("↓");
+				answers.add(LABEL_ANSWER_2);
+				answers.add(LABEL_ANSWER_3);
+				answers.add(LABEL_ANSWER_4);
 				answers.add(test2Array[q.getId()][2]);
 			}else{
 				answers.add(test2Array[q.getId()][2]);
-				answers.add("↑");
-				answers.add("どっちともいえない");
-				answers.add("↓");
+				answers.add(LABEL_ANSWER_2);
+				answers.add(LABEL_ANSWER_3);
+				answers.add(LABEL_ANSWER_4);
 				answers.add(test2Array[q.getId()][1]);
 			}
 			q.setAnswers(answers);
@@ -237,9 +239,9 @@ public class WorkoutContext implements ViewConstants{
 			List<String> answers = new LinkedList<String>();
 			if(q.isForward()){
 				answers.add(test3Array[q.getId()][1]);
-				answers.add("↑");
-				answers.add("どっちともいえない");
-				answers.add("↓");
+				answers.add(LABEL_ANSWER_2);
+				answers.add(LABEL_ANSWER_3);
+				answers.add(LABEL_ANSWER_4);
 				answers.add(test3Array[q.getId()][2]);
 			}else{
 				answers.add(test3Array[q.getId()][2]);
@@ -396,6 +398,8 @@ public class WorkoutContext implements ViewConstants{
 		while(it.hasNext()){
 			String key = it.next();
 			if(key==null) continue;
+			//TODO
+			//if(key.equals(REQ_ATTRKEY_RESULT)) continue;
 			String value = params.get(key);
 			if(value==null) continue;
 			result.put(key, value);
@@ -415,46 +419,51 @@ public class WorkoutContext implements ViewConstants{
 		StringBuffer result = new StringBuffer();
 		if(kingSold>schlCrft){
 			if(king>solder){
-				result.append("王様");
+				result.append(LABEL_RESULT_KING);
 			}else if(king<solder){
-				result.append("軍人");
+				result.append(LABEL_RESULT_SOLD);
 			}else{
-				result.append("王様と軍人の中間");
+				result.append(LABEL_RESULT_KINGSOLD);
 			}
 		}else if(kingSold<schlCrft){
 			if(scholar>craftsman){
-				result.append("学者");
+				result.append(LABEL_RESULT_SCHL);
 			}else if(scholar<craftsman){
-				result.append("職人");
+				result.append(LABEL_RESULT_CRFT);
 			}else{
-				result.append("学者と職人の中間");
+				result.append(LABEL_RESULT_SCHLCRFT);
 			}
 		}else{
-			if(king>solder){
-				result.append("王様傾向のある");
-			}else if(king<solder){
-				result.append("軍人傾向のある");
-			}else{
-				result.append("王様と軍人の中間で");
+			result.append(LABEL_RESULT_NOVECTOR);
+			if(king>=0&&king>solder){
+				result.append(LABEL_RESULT_AND_KING);
+			}else if(king>=0&&king<solder){
+				result.append(LABEL_RESULT_AND_SOLD);
+			}else if(king>=0){
+				result.append(LABEL_RESULT_KINGSOLD_UNKNOWN);
 			}
-			if(scholar>craftsman){
-				result.append("学者");
-			}else if(scholar<craftsman){
-				result.append("職人");
-			}else{
-				result.append("学者と職人の中間");
+			if(scholar>=0&&scholar>craftsman){
+				result.append(LABEL_RESULT_AND_SCHL);
+			}else if(scholar>=0&&scholar<craftsman){
+				result.append(LABEL_RESULT_AND_CRFT);
+			}else if(scholar>=0){
+				result.append(LABEL_RESULT_SCHLCRFT_UNKNOWN);
 			}
 		}
 		
 		return result.toString();
 	}
 
-	public void store(){
+	public Count store(){
+		Count c = null;
 		try{
 			BigTableStoreManager.getInstance().doStore(this);
 			MailStoreManager.getInstance().doStore(this);
+			c = BigTableStoreManager.getInstance().getCount(this);
+			return c;
 		}catch(Exception e){
 			log.log(Level.INFO, "格納処理中例外", e);
+			return c;
 		}
 	}
 	
@@ -593,4 +602,105 @@ public class WorkoutContext implements ViewConstants{
 		}
 		return aList;		
 	}
+	
+	 public String getMessageBody(){
+         StringBuffer buf = new StringBuffer();
+
+         //Test key
+         StringTokenizer st = new StringTokenizer(getTestKey(), TESTKEY_OUTER_SEP);
+         buf.append("\"");
+         buf.append(REQ_KEY_TESTKEY);
+         buf.append("\",\"");
+         buf.append(st.nextToken());
+         buf.append("\"\n");
+
+         // Date
+         buf.append("\"EvaluatedAt\",");
+         buf.append(Utils.now());
+         buf.append("\n");
+
+         // TestResult
+         String result = Utils.omitTag(getResult());
+         buf.append("\"");
+         buf.append(REQ_ATTRKEY_RESULT);
+         buf.append("\",\"");
+         buf.append(result);
+         buf.append("\"\n");
+
+         // SummaryScore
+         buf.append("\"SUM_");
+         buf.append(REQ_KEY_QUESTION_TEST1);
+         buf.append("_KINGSOLD\",");
+         buf.append(getKingOrSolderScore());
+         buf.append("\n");
+         buf.append("\"SUM_");
+         buf.append(REQ_KEY_QUESTION_TEST1);
+         buf.append("_SCHLCRFT\",");
+         buf.append(getScholarOrCraftsmanScore());
+         buf.append("\n");
+         int score = getKingScore();
+         if(score>=0){
+                 buf.append("\"SUM_");
+                 buf.append(REQ_KEY_QUESTION_TEST2);
+                 buf.append("_KING\",");
+                 buf.append(score);
+                 buf.append("\n");
+         }
+         score = getSolderScore();
+         if(score>=0){
+                 buf.append("\"SUM_");
+                 buf.append(REQ_KEY_QUESTION_TEST2);
+                 buf.append("_SOLD\",");
+                 buf.append(score);
+                 buf.append("\n");
+         }
+         score = getScholarScore();
+         if(score>=0){
+                 buf.append("\"SUM_");
+                 buf.append(REQ_KEY_QUESTION_TEST3);
+                 buf.append("_SCHL\",");
+                 buf.append(score);
+                 buf.append("\n");
+         }
+         score = getCraftsmanScore();
+         if(score>=0){
+                 buf.append("\"SUM_");
+                 buf.append(REQ_KEY_QUESTION_TEST3);
+                 buf.append("_CRFT\",");
+                 buf.append(score);
+                 buf.append("\n");
+         }
+
+         // Score Detail
+         Iterator<String> it = params.keySet().iterator();
+         Map<String, String> map = new TreeMap<String, String>();
+         while(it.hasNext()){
+                 String key = it.next();
+                 boolean reverse = false;
+                 if(key!=null && (REQ_KEY_QUESTION_PREFIX + REQ_KEY_QUESTION_SEP).equals(key)){
+                         StringTokenizer st2 = new StringTokenizer(key, REQ_KEY_QUESTION_SEP);
+                         st2.nextToken(); // Q
+                         String testType = st2.nextToken();
+                         st2.nextToken(); // order
+                         String questionNo = st2.nextToken(); // id
+                         if(REQ_KEY_QUESTION_REW_SUFFIX.equals(st2.nextToken())){
+                                 reverse = true;
+                         }
+                         int value = Integer.parseInt(Utils.omitZero(params.get(key)));
+                         value = reverse?(value*(-1)):value;
+                         map.put(testType+questionNo, new Integer(value).toString());
+                 }
+         }
+         it = map.keySet().iterator();
+         while(it.hasNext()){
+                 buf.append("\"");
+                 String key = it.next();
+                 buf.append(key);
+                 buf.append("\",");
+                 buf.append(map.get(key));
+                 buf.append("\n");
+         }
+
+         return buf.toString();
+	 }
 }

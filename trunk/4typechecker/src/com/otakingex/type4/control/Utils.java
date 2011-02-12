@@ -1,11 +1,13 @@
 package com.otakingex.type4.control;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
+import java.util.TimeZone;
 import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
@@ -128,5 +130,76 @@ public class Utils implements ViewConstants{
 		if(val<0) val *= -1;
 		return (val % 2)==1;
 	}
+	
+    public static String now(){
+        StringBuffer buf = new StringBuffer();
+        Calendar cal = Calendar.getInstance();
+		TimeZone tz = TimeZone.getTimeZone("Asia/Tokyo");
+		cal.setTimeZone(tz);
+        buf.append(cal.get(Calendar.YEAR));
+        buf.append("/");
+        buf.append(cal.get(Calendar.MONTH) + 1);
+        buf.append("/");
+        buf.append(cal.get(Calendar.DATE));
+        buf.append(" ");
+        buf.append(cal.get(Calendar.HOUR_OF_DAY));
+        buf.append(":");
+        buf.append(cal.get(Calendar.MINUTE));
+        buf.append(":");
+        buf.append(cal.get(Calendar.SECOND));
+        return buf.toString();
+    }
 
+    public static String omitZero(String num){
+        if(num==null || "".equals(num)) return num;
+        String org = num.trim();
+        StringBuffer buf = new StringBuffer();
+        boolean omit = true;
+        for(int pos=0; pos<org.length();pos++){
+                char c = org.charAt(pos);
+                if('0'==c){
+                        if(!omit) buf.append(c);
+                }else{
+                        omit = false;
+                        buf.append(c);
+                }
+        }
+        if(buf.length()==0) return "0";
+        return buf.toString();
+	}
+	public static String omitTag(String org){
+        if(org==null || "".equals(org)) return org;
+        String org2 = org.trim();
+        StringBuffer buf = new StringBuffer();
+        boolean omit = false;
+        for(int pos=0; pos<org2.length();pos++){
+                char c = org2.charAt(pos);
+                if('<' == c || '>' == c){
+                        omit = (!omit);
+                        continue;
+                } 
+                if(!omit) buf.append(c);
+        }
+        return buf.toString();
+	}
+	
+	public static String getDate(Date date){
+		StringBuffer buf = new StringBuffer();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		TimeZone tz = TimeZone.getTimeZone("Asia/Tokyo");
+		cal.setTimeZone(tz);
+        buf.append(cal.get(Calendar.YEAR));
+        buf.append("/");
+        buf.append(cal.get(Calendar.MONTH) + 1);
+        buf.append("/");
+        buf.append(cal.get(Calendar.DATE));
+        buf.append(" ");
+        buf.append(cal.get(Calendar.HOUR_OF_DAY));
+        buf.append(":");
+        buf.append(cal.get(Calendar.MINUTE));
+        buf.append(":");
+        buf.append(cal.get(Calendar.SECOND));
+		return buf.toString();
+	}
 }
