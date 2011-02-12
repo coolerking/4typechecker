@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.otakingex.type4.control.Utils;
 import com.otakingex.type4.control.WorkoutContext;
 import com.otakingex.type4.model.Count;
+import com.otakingex.type4.store.BigTableStoreManager;
 
-public class SummaryServlet extends BaseServlet {
+public class EstimateServlet extends BaseServlet {
 
-	private static final long serialVersionUID = 4314954898375142805L;
+	private static final long serialVersionUID = 3905441063270187330L;
 	private Logger log = Logger.getLogger(getClass().getName());
-	
+
 	public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		sendRedirect(JSP_NOLINK, req, resp);
 	}
-	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp){
 		try{
 			WorkoutContext con = new WorkoutContext(Utils.getParameters(req));
@@ -57,6 +57,9 @@ public class SummaryServlet extends BaseServlet {
 
 			// for hidden
 			Map<String, String> hiddens = con.getHiddenMap();
+			if(hiddens.containsValue(REQ_VALUE_ESTIMATE_NOANSWER)){
+				hiddens.remove(REQ_KEY_ESTIMATE);
+			}
 			hiddens.put(REQ_KEY_TESTKEY, testKey);
 			hiddens.put(REQ_ATTRKEY_RESULT, con.getResult());
 
@@ -64,15 +67,16 @@ public class SummaryServlet extends BaseServlet {
 					REQ_ATTRKEY_HIDDENMAP, 
 					hiddens);
 			
-			Count c = con.store();
+			Count c = BigTableStoreManager.getInstance().getCount();
 			req.setAttribute(REQ_ATTRKEY_COUNT, c);
+			
+			
 			
 			sendRedirect(JSP_SUMMARY, req, resp);
 
 		}catch(Exception e){
-			log.log(Level.INFO, "SummaryServlet実行中の例外", e);
+			log.log(Level.INFO, "EstimateServlet実行中の例外", e);
 			sendRedirect(JSP_ERROR, req, resp);
 		}
 	}
-
 }

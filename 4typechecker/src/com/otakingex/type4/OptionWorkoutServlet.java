@@ -18,7 +18,7 @@ public class OptionWorkoutServlet extends BaseServlet {
 	private Logger log = Logger.getLogger(getClass().getName());
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp){
-		doPost(req, resp);
+		sendRedirect(JSP_NOLINK, req, resp);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp){
@@ -28,7 +28,7 @@ public class OptionWorkoutServlet extends BaseServlet {
 			
 			if(con.getKingScore()<0){
 				// 王様・軍人テスト
-				req.setAttribute(REQ_ATTRKEY_SUBTITLE, "王様・軍人テスト");
+				req.setAttribute(REQ_ATTRKEY_SUBTITLE, SUBTITLE_KINGSOLD);
 				req.setAttribute(
 						REQ_ATTRKEY_KINGSOLD_LIST, 
 						con.getKingOrSolderQuestions(testKey));
@@ -38,7 +38,7 @@ public class OptionWorkoutServlet extends BaseServlet {
 				
 			}else{
 				// 学者・職人テスト
-				req.setAttribute(REQ_ATTRKEY_SUBTITLE, "王様・軍人テスト");
+				req.setAttribute(REQ_ATTRKEY_SUBTITLE, SUBTITLE_SCHLCRFT);
 				req.setAttribute(
 						REQ_ATTRKEY_KINGSOLD_LIST, 
 						new LinkedList<Question>());
