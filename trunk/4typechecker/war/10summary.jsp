@@ -7,6 +7,7 @@
 <%@ page import="com.otakingex.type4.control.Utils" %>
 <%@ page import="com.otakingex.type4.ViewConstants" %>
 <%@ page import="com.otakingex.type4.model.Answer" %>
+<%@ page import="com.otakingex.type4.model.Count" %>
 <%
 	String kingOrSolder = (String)request.getAttribute(ViewConstants.REQ_KEY_SCORE_KINGSOLD);
 	String scholarOrCraftsman = (String)request.getAttribute(ViewConstants.REQ_KEY_SCORE_SCHLCRFT);
@@ -15,6 +16,17 @@
 	String scholar = (String)request.getAttribute(ViewConstants.REQ_KEY_SCORE_SCHOLAR);
 	String craftsman = (String)request.getAttribute(ViewConstants.REQ_KEY_SCORE_CRAFTSMAN);
 	String result = (String)request.getAttribute(ViewConstants.REQ_ATTRKEY_RESULT);
+	boolean isKingOrSolder = Integer.parseInt(kingOrSolder)>=Integer.parseInt(scholarOrCraftsman);
+	Count c = (Count)request.getAttribute(ViewConstants.REQ_ATTRKEY_COUNT);
+	int total = c.getTotal();
+	int kingTotal = c.getKing();
+	int soldTotal = c.getSolder();
+	int schlTotal = c.getScholar();
+	int crftTotal = c.getCraftsman();
+	int kingPer = (int)(((float)kingTotal)*100.0F/((float)total));
+	int soldPer = (int)(((float)soldTotal)*100.0F/((float)total));
+	int schlPer = (int)(((float)schlTotal)*100.0F/((float)total));
+	int crftPer = (int)(((float)crftTotal)*100.0F/((float)total));
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -23,19 +35,13 @@
 <link type="text/css" rel="stylesheet" href="css/base.css">
 <link type="text/css" rel="stylesheet" href="css/tables.css">
 <link rel="shortcut icon" href="/favicon.ico">
-<title>オタキングex 4タイプ簡易判定サイト</title>
-<script type="text/javascript" language=JavaScript>
-<!--
-	function Submit(formName){
-  		document.forms[formName].submit();
-	}
-// -->
-</script>
+<title>オタキングex　4タイプ判定テスト</title>
+<script type="text/javascript" src="/js/drawRader.js"></script>
 </head>
-<body>
-<form name="option" method="POST" action="/option">
+<body onload="drawRader(<%= kingOrSolder %>, <%= scholarOrCraftsman %>, <%= isKingOrSolder?king:craftsman %>, <%= isKingOrSolder?solder:scholar %>,<%= kingPer %>, <%= soldPer %>, <%= schlPer %>, <%= crftPer %>);">
+<p align="right"><font size="-2">累積判定者数：<%= total %>人(<%= c.getCreatedAt().toString() %>以降)</font></p>
 
-<h1>4タイプ簡易判定サイト</h1>
+<h1>4タイプ判定テスト</h1>
 
 <h1>結果</h1>
 
@@ -43,17 +49,29 @@
 あなたは、<font size="+2"><%= result %></font>です。
 </p>
 
+<center>
+<canvas id="rader" width="400" height="400">
+<p>
+※HTML5対応ブラウザを使用すると、グラフを表示できます
+</p>
+</canvas>
+</center>
+
+<br>
+
+<form name="option" method="POST" action="/option">
+
 <p align="center">
 <table align="center" cellspacing="0" summary="4Type Result">
 <tbody>
   <tr>
     <th scope="col" abbr="Configurations" class="nobg">集計結果</th>
-    <th scope="col" abbr="Dual 1.2">王様・軍人</th>
-    <th scope="col" abbr="Dual 1.2">学者・職人</th>
-	<th scope="col" abbr="Dual 0.8">王様</th>
-	<th scope="col" abbr="Dual 0.8">軍人</th>
-	<th scope="col" abbr="Dual 0.8">学者</th>
-	<th scope="col" abbr="Dual 0.8">職人</th>
+    <th scope="col" abbr="Dual 1.2">注目・司令</th>
+    <th scope="col" abbr="Dual 1.2">法則・理想</th>
+	<th scope="col" abbr="Dual 0.8">注目型</th>
+	<th scope="col" abbr="Dual 0.8">司令型</th>
+	<th scope="col" abbr="Dual 0.8">法則型</th>
+	<th scope="col" abbr="Dual 0.8">理想型</th>
   </tr>
   <tr>
     <th scope="row" abbr="Model" class="spec">向性テスト</th>
@@ -68,7 +86,7 @@
 <%
 	if(" ".equals(king) || " ".equals(solder)){
 %>
-    <th scope="row" abbr="Model" class="spec"><a href="javascript:Submit('option')">"王様・軍人テスト</a></th>
+    <th scope="row" abbr="Model" class="spec"><a href="#" onClick="document.option.submit();return false">注目型・司令型テスト</a></th>
     <td bgcolor="#919191"> </td>
     <td bgcolor="#919191"> </td>
     <td bgcolor="#919191"> </td>
@@ -78,7 +96,7 @@
 <%
 	}else{
 %>
-    <th scope="row" abbr="Model" class="spec">王様・軍人テスト</th>
+    <th scope="row" abbr="Model" class="spec">注目型・司令型テスト</th>
     <td bgcolor="#919191"> </td>
     <td bgcolor="#919191"> </td>
     <td align="right"><%= king %></td>
@@ -93,7 +111,7 @@
 <%
 	if(" ".equals(scholar) || " ".equals(craftsman)){
 %>
-    <th scope="row" abbr="Model" class="spec"><a href="javascript:Submit('option')">学者・職人テスト</a></th>
+    <th scope="row" abbr="Model" class="spec"><a href="#" onClick="document.option.submit();return false">法則型・理想型テスト</a></th>
     <td bgcolor="#919191"> </td>
     <td bgcolor="#919191"> </td>
     <td bgcolor="#919191"> </td>
@@ -103,7 +121,7 @@
 <%
 	}else{
 %>
-    <th scope="row" abbr="Model" class="spec">学者・職人テスト</th>
+    <th scope="row" abbr="Model" class="spec">法則型・理想型テスト</th>
     <td bgcolor="#919191"> </td>
     <td bgcolor="#919191"> </td>
     <td bgcolor="#919191"> </td>
@@ -111,6 +129,23 @@
     <td align="right"><%= scholar %></td>
     <td align="right"><%= craftsman %></td>
 <%
+	}
+	Map<String, String> hiddens = 
+		(Map<String, String>)
+			request.getAttribute(
+					ViewConstants.REQ_ATTRKEY_HIDDENMAP);
+	if(hiddens!=null && (!hiddens.isEmpty())){
+		Iterator<String> iter2 = hiddens.keySet().iterator();
+		while(iter2.hasNext()){
+			String key2 = iter2.next();
+			if(key2==null) continue;
+			if(key2.equals(ViewConstants.REQ_ATTRKEY_RESULT)) continue;
+			String value2 = hiddens.get(key2);
+			if(value2==null) continue;
+%>
+	<input type="hidden" name="<%= key2 %>" value="<%=value2 %>" />
+<%
+		}
 	}
 %>
   </tr>
@@ -121,19 +156,34 @@
 <br>
 
 <p align="center">
-
-
+お疲れ様でした（＾ ＾）<br>
+結果はお分かりになりましたか？<br>
+<br>
+各タイプの説明は、こちらをご参照ください。
 </p>
+
+<p align="center">
+<a href="http://www.amazon.co.jp/exec/obidos/ASIN/4023308838/otakingex01-22/">[Amazon]人生の法則 「欲求の4タイプ」で分かるあなたと他人</a>
+<br>
+[<a href="<%= ViewConstants.URL_KING %>">注目型</a>][<a href="<%= ViewConstants.URL_SOLD %>">司令型</a>][<a href="<%= ViewConstants.URL_SCHL %>">法則型</a>][<a href="<%= ViewConstants.URL_CRFT %>">理想型</a>]
+<br>
+<br>
+<a href="http://www.youtube.com/watch?v=zFEYE9HYJUY">[Youtube]岡田斗司夫のひとり夜話(2010/11/6)#7</a>
+<br>
+<a href="http://otaking-ex.jp/wp/?page_id=5008">[オタキングex公式サイト]人間関係の特効薬　人生のトリセツ</a>
+</p>
+
+<br>
+<p align="center">
+<a href="/21enquete.html" target="_blank">4タイプ判定テストのご意見をお聞かせください</a>
+</P>
 <%
-	Map<String, String> hiddens = 
-		(Map<String, String>)
-			request.getAttribute(
-					ViewConstants.REQ_ATTRKEY_HIDDENMAP);
 	if(hiddens!=null && (!hiddens.isEmpty())){
 		Iterator<String> iter = hiddens.keySet().iterator();
 		while(iter.hasNext()){
 			String key = iter.next();
 			if(key==null) continue;
+			if(key.equals(ViewConstants.REQ_ATTRKEY_RESULT)) continue;
 			String value = hiddens.get(key);
 			if(value==null) continue;
 %>
@@ -155,8 +205,8 @@
 	<tbody>
 		<tr>
 		<th scope="col" abbr="Configurations" class="nobg"><a name="#tropism">向性テスト</a></th>
-		<th scope="col" abbr="Dual 1.2">王様・軍人</th>
-    	<th scope="col" abbr="Dual 1.2">学者・職人</th>
+		<th scope="col" abbr="Dual 1.2">注目型・司令型</th>
+    	<th scope="col" abbr="Dual 1.2">法則型・理想型</th>
   		</tr>
 <%
 		Iterator<Answer> it = tList.iterator();
@@ -181,7 +231,7 @@
 
 
 
-<!-- 王様・軍人テスト結果 -->
+<!-- 注目型・司令型テスト結果 -->
 <%
 	List<Answer> ksList = (List<Answer>)request.getAttribute(ViewConstants.REQ_KEY_ANSWERS_KINGSOLD);
 	if(!ksList.isEmpty()){
@@ -192,9 +242,9 @@
 	<table align="center" cellspacing="0" summary="4Type Result">
 	<tbody>
 		<tr>
-		<th scope="col" abbr="Configurations" class="nobg"><a name="#kingOrSolder">王様・軍人テスト</a></th>
-		<th scope="col" abbr="Dual 1.2">王様</th>
-    	<th scope="col" abbr="Dual 1.2">軍人</th>
+		<th scope="col" abbr="Configurations" class="nobg"><a name="#kingOrSolder">注目型・司令型テスト</a></th>
+		<th scope="col" abbr="Dual 1.2">注目型</th>
+    	<th scope="col" abbr="Dual 1.2">司令型</th>
   		</tr>
 <%
 		Iterator<Answer> it = ksList.iterator();
@@ -217,7 +267,7 @@
 	}
 %>
 
-<!-- 学者・職人テスト結果 -->
+<!-- 法則型・理想型テスト結果 -->
 <%
 	List<Answer> scList = (List<Answer>)request.getAttribute(ViewConstants.REQ_KEY_ANSWERS_SCHLCRFT);
 	if(!scList.isEmpty()){
@@ -228,9 +278,9 @@
 	<table align="center" cellspacing="0" summary="4Type Result">
 	<tbody>
 		<tr>
-		<th scope="col" abbr="Configurations" class="nobg"><a name="#kingOrSolder">学者・職人テスト</a></th>
-		<th scope="col" abbr="Dual 1.2">学者</th>
-    	<th scope="col" abbr="Dual 1.2">職人</th>
+		<th scope="col" abbr="Configurations" class="nobg"><a name="#kingOrSolder">法則型・理想型テスト</a></th>
+		<th scope="col" abbr="Dual 1.2">法則型</th>
+    	<th scope="col" abbr="Dual 1.2">理想型</th>
   		</tr>
 <%
 		Iterator<Answer> it = scList.iterator();
