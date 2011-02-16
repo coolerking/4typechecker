@@ -13,12 +13,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.otakingex.type4.control.Utils;
 import com.otakingex.type4.model.User;
-
+/**
+ * BaseServlet Servletで使用する共通機能を実装。
+ * @author Tasuku
+ */
 public abstract class BaseServlet extends HttpServlet implements ViewConstants{
 
 	private static final long serialVersionUID = 2180730094602666191L;
 	private Logger log = Logger.getLogger(getClass().getName());
 	
+	/**
+	 * User オブジェクトの取得
+	 * @param req
+	 * @return com.otakingex.type4.model.User
+	 */
 	User getUser(HttpServletRequest req){
 		Map<String, String> params = Utils.getParameters(req);
 		String name = params.get(REQ_KEY_NAME);
@@ -35,6 +43,12 @@ public abstract class BaseServlet extends HttpServlet implements ViewConstants{
 		return user;
 	}
 	
+	/**
+	 * リダイレクトへ進む
+	 * @param jspName JSP名
+	 * @param req リクエスト
+	 * @param resp レスポンス
+	 */
 	void sendRedirect(String jspName, HttpServletRequest req, HttpServletResponse resp){
 		ServletContext context = getServletContext();
 		RequestDispatcher rd = context.getRequestDispatcher(jspName);
