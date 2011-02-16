@@ -207,7 +207,7 @@
 	<br>
 	<a href="http://www.youtube.com/watch?v=zFEYE9HYJUY">[Youtube]岡田斗司夫のひとり夜話(2010/11/6)#7</a>
 	<br>
-	<a href="http://otaking-ex.jp/wp/?page_id=5008">[オタキングex公式サイト]人間関係の特効薬　人生のトリセツ</a>
+	<a href="http://on.fb.me/ebpNKn">[Facebook]人間関係の特効薬　人生のトリセツ</a>
 	</p>
 
 
