@@ -13,11 +13,18 @@ public interface ViewConstants {
 	public static final String URL_SCHL = "http://otaking-ex.jp/wp/?p=14358";
 	public static final String URL_CRFT = "http://otaking-ex.jp/wp/?p=14371";
 	*/
-	public static final String URL_TOP = "http://on.fb.me/ebpNKn";
-	public static final String URL_KING = "http://on.fb.me/gHm7Q9";
-	public static final String URL_SOLD = "http://on.fb.me/e28Uc3";
-	public static final String URL_SCHL = "http://on.fb.me/ez9B77";
-	public static final String URL_CRFT = "http://on.fb.me/f0nlQj";
+	/*
+	public static final String URL_TOP = "http://www.facebook.com/pages/%EF%BC%94%E3%82%BF%E3%82%A4%E3%83%97/181531745221992#!/pages/%EF%BC%94%E3%82%BF%E3%82%A4%E3%83%97/181531745221992?sk=wall";
+	public static final String URL_KING = "http://www.facebook.com/pages/%EF%BC%94%E3%82%BF%E3%82%A4%E3%83%97/181531745221992#!/pages/%EF%BC%94%E3%82%BF%E3%82%A4%E3%83%97/181531745221992?sk=app_7146470109";
+	public static final String URL_SOLD = "http://www.facebook.com/pages/%EF%BC%94%E3%82%BF%E3%82%A4%E3%83%97/181531745221992#!/pages/%EF%BC%94%E3%82%BF%E3%82%A4%E3%83%97/181531745221992?sk=app_6009294086";
+	public static final String URL_SCHL = "http://www.facebook.com/pages/%EF%BC%94%E3%82%BF%E3%82%A4%E3%83%97/181531745221992#!/pages/%EF%BC%94%E3%82%BF%E3%82%A4%E3%83%97/181531745221992?sk=app_11007063052";
+	public static final String URL_CRFT = "http://www.facebook.com/pages/%EF%BC%94%E3%82%BF%E3%82%A4%E3%83%97/181531745221992#!/pages/%EF%BC%94%E3%82%BF%E3%82%A4%E3%83%97/181531745221992?sk=app_10442206389";
+	*/
+	public static final String URL_TOP = "http://www.facebook.com/fourtype";
+	public static final String URL_KING = "http://www.facebook.com/fourtype?sk=app_7146470109";
+	public static final String URL_SOLD = "http://www.facebook.com/fourtype?sk=app_6009294086";
+	public static final String URL_SCHL = "http://www.facebook.com/fourtype?sk=app_11007063052";
+	public static final String URL_CRFT = "http://www.facebook.com/fourtype?sk=app_10442206389";
 
 	// JSP
 	public static final String JSP_ENTRY = "/01entry.jsp";
