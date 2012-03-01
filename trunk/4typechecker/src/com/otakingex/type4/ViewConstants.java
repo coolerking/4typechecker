@@ -94,6 +94,7 @@ public interface ViewConstants {
 	public static final String TESTKEY_INNER_SEP = "-";
 	
 	public static final String SYSTEM_PROP_IS_STORE = "type4.store";
+	public static final String SYSTEM_PROP_USE_MAIL = "type4.store.mail";
 	public static final String SYSTEM_PROP_MAILADDRESS = "type4.store.mailaddress";
 	
 	public static final String REQ_KEY_SCORE_KINGSOLD = "SCORE_KINGSOLD";

@@ -458,7 +458,7 @@ public class WorkoutContext implements ViewConstants{
 		Count c = null;
 		try{
 			BigTableStoreManager.getInstance().doStore(this);
-			MailStoreManager.getInstance().doStore(this);
+			//MailStoreManager.getInstance().doStore(this);
 			c = BigTableStoreManager.getInstance().getCount(this);
 			return c;
 		}catch(Exception e){

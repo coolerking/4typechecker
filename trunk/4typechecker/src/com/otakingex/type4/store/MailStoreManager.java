@@ -26,6 +26,14 @@ public class MailStoreManager {
                }else{
                        store = false;
                }
+               doStore = System.getProperty(ViewConstants.SYSTEM_PROP_USE_MAIL);
+               doStore = doStore.trim().toLowerCase();
+               if("true".equals(doStore)){
+                       store = true;
+               }else{
+                       store = false;
+               }
+               
                address = System.getProperty(ViewConstants.SYSTEM_PROP_MAILADDRESS);
                if(address==null) store = false;
                else store = true;
