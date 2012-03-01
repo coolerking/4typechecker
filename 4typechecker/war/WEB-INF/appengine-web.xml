@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
-	<application>4typechecker</application>
+	<application>memechecker</application>
 	<version>1</version>
 	
 	<!-- Configure java.util.logging -->
@@ -10,6 +10,8 @@
 		<property name="type4.currentmaster" value="com.otakingex.type4.master.TestMaster20110203"/>
 		<!-- comment out to deny store results -->
 		<property name="type4.store" value="true"/>
+		<!-- because of Google mail api limit <=100 -->
+		<property name="type4.store.mail" value="false"/>
 		<!-- please comment out if no need to send each result -->
 		<property name="type4.store.mailaddress" value="4typechecker.ex@gmail.com" />
 	</system-properties>

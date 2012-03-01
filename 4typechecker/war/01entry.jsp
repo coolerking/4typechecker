@@ -13,7 +13,7 @@
 	<link type="text/css" rel="stylesheet" href="/css/base.css">
 	<link type="text/css" rel="stylesheet" href="/css/tables.css">
 	<link rel="shortcut icon" href="/favicon.ico">
-	<title>オタキングex 4タイプ判定テスト</title>
+	<title>FREEex 4タイプ判定テスト</title>
 </head>
 <body>
 	<h1>4タイプ判定テスト</h1>
