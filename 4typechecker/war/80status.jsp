@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
    pageEncoding="utf-8"%>
-<%@ page import="com.otakingex.type4.ViewConstants" %>
-<%@ page import="com.otakingex.type4.control.Utils" %>
-<%@ page import="com.otakingex.type4.model.Count" %>
+<%@ page import="jp.freeex.fourtypes.ViewConstants" %>
+<%@ page import="jp.freeex.fourtypes.control.Utils" %>
+<%@ page import="jp.freeex.fourtypes.model.Count" %>
 <%
        Count c = (Count)request.getAttribute(ViewConstants.REQ_KEY_COUNT);
        int total = c.getTotal();
@@ -25,7 +25,7 @@
 <link type="text/css" rel="stylesheet" href="css/base.css">
 <link type="text/css" rel="stylesheet" href="css/tables.css">
 <link rel="shortcut icon" href="/favicon.ico">
-<title>FrEEex 4タイプ判定テスト</title>
+<title>FREEex 4タイプ判定テスト</title>
 </head>
 <body>
 <h1>4タイプ判定テスト</h1>

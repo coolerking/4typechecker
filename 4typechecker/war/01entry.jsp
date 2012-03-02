@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ page import="com.otakingex.type4.ViewConstants" %>
-<%@ page import="com.otakingex.type4.model.User" %>
+<%@ page import="jp.freeex.fourtypes.ViewConstants" %>
+<%@ page import="jp.freeex.fourtypes.model.User" %>
 <%
 	User user = (User)request.getAttribute(ViewConstants.REQ_ATTRKEY_USER);
 	if(user==null) user = new User();
@@ -83,5 +83,16 @@
 <a href="http://on.fb.me/ebpNKn">[Facebook]人間関係の特効薬　人生のトリセツ</a>
 -->
 </p>
+<!-- facebook plugin start -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<center><div class="fb-like" data-href="http://4typechecker.appspot.com/" data-send="true" data-width="450" data-show-faces="true"></div></center>
+<!-- facebook plugin end -->
 </body>
 </html>

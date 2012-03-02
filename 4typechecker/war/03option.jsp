@@ -3,9 +3,9 @@
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.otakingex.type4.control.Utils" %>
-<%@ page import="com.otakingex.type4.ViewConstants" %>
-<%@ page import="com.otakingex.type4.model.Question" %>
+<%@ page import="jp.freeex.fourtypes.control.Utils" %>
+<%@ page import="jp.freeex.fourtypes.ViewConstants" %>
+<%@ page import="jp.freeex.fourtypes.model.Question" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -162,6 +162,17 @@
 -->
 	</p>
 
+<!-- facebook plugin start -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<center><div class="fb-like" data-href="http://4typechecker.appspot.com/" data-send="true" data-width="450" data-show-faces="true"></div></center>
+<!-- facebook plugin end -->
 
 </body>
 </html>
