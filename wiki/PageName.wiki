@@ -1,0 +1,17 @@
+#summary One-sentence summary of this page.
+
+=社会生物本能の4タイプ=
+
+4タイプとは、大阪芸術大学客員教授岡田斗司夫氏により提唱された人間の欲求特性を定量的に分類する手法です。
+人間の欲求特性、社会生物としての人間の本能を44問からなる比較的単純なテストをもちいて、
+2つの特性（外向性・内向性、抽象的・具体的）を定量評価し、2次元グラフ化して表現します。
+
+[4タイプ判定テスト http://4typechecker.appspot.com/]は、どのタイプかを判定するために使用するツールです。
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
