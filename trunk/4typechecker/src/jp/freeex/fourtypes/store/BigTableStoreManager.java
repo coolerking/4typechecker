@@ -41,7 +41,9 @@ public class BigTableStoreManager {
 		sum.setName(user.getName());
 		sum.setAge(user.getAge());
 		sum.setMale(user.isMale());
-		sum.setKingOrSolderScore(con.getScholarOrCraftsmanScore());
+// bug fixed 2012/05/09
+//		sum.setKingOrSolderScore(con.getScholarOrCraftsmanScore());
+		sum.setKingOrSolderScore(con.getKingOrSolderScore());
 		sum.setScholarOrCraftsmanScore(con.getScholarOrCraftsmanScore());
 		sum.setKingScore(con.getKingScore());
 		sum.setSolderScore(con.getSolderScore());

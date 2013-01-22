@@ -169,6 +169,8 @@
 -->
 [<a href="<%= ViewConstants.URL_KING %>">注目型</a>][<a href="<%= ViewConstants.URL_SOLD %>">司令型</a>][<a href="<%= ViewConstants.URL_SCHL %>">法則型</a>][<a href="<%= ViewConstants.URL_CRFT %>">理想型</a>]
 <br>
+[<a href="<%= ViewConstants.URL_UNKN %>">判定不能の方</a>]
+<br>
 <!--
 <br>
 <a href="http://www.youtube.com/watch?v=zFEYE9HYJUY">[Youtube]岡田斗司夫のひとり夜話(2010/11/6)#7</a>

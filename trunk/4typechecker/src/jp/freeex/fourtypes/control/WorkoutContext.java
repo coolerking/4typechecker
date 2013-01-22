@@ -19,7 +19,7 @@ import jp.freeex.fourtypes.model.Count;
 import jp.freeex.fourtypes.model.Question;
 import jp.freeex.fourtypes.model.User;
 import jp.freeex.fourtypes.store.BigTableStoreManager;
-import jp.freeex.fourtypes.store.MailStoreManager;
+//import jp.freeex.fourtypes.store.MailStoreManager;
 
 public class WorkoutContext implements ViewConstants{
 	
@@ -262,7 +262,7 @@ public class WorkoutContext implements ViewConstants{
 	
 	public int getKingOrSolderScore(){
 		int kingSold = 0;
-		int schlCrft = 0;
+//		int schlCrft = 0;
 		Map<String, String> result = 
 			Utils.getContainsMap(params, REQ_KEY_QUESTION_PREFIX, REQ_KEY_QUESTION_TEST1);
 		if(result==null||result.isEmpty()) return -1;
@@ -273,17 +273,17 @@ public class WorkoutContext implements ViewConstants{
 			int value = Integer.parseInt(result.get(key));
 			if(key.endsWith(REQ_KEY_QUESTION_FWD_SUFFIX)){
 				if(value>0) kingSold += value;
-				else if(value<0) schlCrft -= value;
+//				else if(value<0) schlCrft -= value;
 			}else if(key.endsWith(REQ_KEY_QUESTION_REW_SUFFIX)){
 				if(value<0) kingSold -= value;
-				else if(value>0) schlCrft += value;
+//				else if(value>0) schlCrft += value;
 			}
 		}
 		return kingSold;
 	}
 	
 	public int getScholarOrCraftsmanScore(){
-		int kingSold = 0;
+//		int kingSold = 0;
 		int schlCrft = 0;
 		Map<String, String> result = 
 			Utils.getContainsMap(params, REQ_KEY_QUESTION_PREFIX, REQ_KEY_QUESTION_TEST1);
@@ -294,11 +294,11 @@ public class WorkoutContext implements ViewConstants{
 			if(key==null) continue;
 			int value = Integer.parseInt(result.get(key));
 			if(key.endsWith(REQ_KEY_QUESTION_FWD_SUFFIX)){
-				if(value>0) kingSold += value;
-				else if(value<0) schlCrft -= value;
+//				if(value>0) kingSold += value;
+/*				else */ if(value<0) schlCrft -= value;
 			}else if(key.endsWith(REQ_KEY_QUESTION_REW_SUFFIX)){
-				if(value<0) kingSold -= value;
-				else if(value>0) schlCrft += value;
+/*				if(value<0) kingSold -= value;
+				else */ if(value>0) schlCrft += value;
 			}
 		}
 		return schlCrft;
@@ -306,7 +306,7 @@ public class WorkoutContext implements ViewConstants{
 	
 	public int getKingScore(){
 		int king = 0;
-		int solder = 0;
+//		int solder = 0;
 		Map<String, String> result = 
 			Utils.getContainsMap(params, REQ_KEY_QUESTION_PREFIX, REQ_KEY_QUESTION_TEST2);
 		if(result==null||result.isEmpty()) return -1;
@@ -317,17 +317,17 @@ public class WorkoutContext implements ViewConstants{
 			int value = Integer.parseInt(result.get(key));
 			if(key.endsWith(REQ_KEY_QUESTION_FWD_SUFFIX)){
 				if(value>0) king += value;
-				else if(value<0) solder -= value;
+//				else if(value<0) solder -= value;
 			}else if(key.endsWith(REQ_KEY_QUESTION_REW_SUFFIX)){
 				if(value<0) king -= value;
-				else if(value>0) solder += value;
+//				else if(value>0) solder += value;
 			}
 		}
 		return king;
 	}
 	
 	public int getSolderScore(){
-		int king = 0;
+//		int king = 0;
 		int solder = 0;
 		Map<String, String> result = 
 			Utils.getContainsMap(params, REQ_KEY_QUESTION_PREFIX, REQ_KEY_QUESTION_TEST2);
@@ -338,11 +338,11 @@ public class WorkoutContext implements ViewConstants{
 			if(key==null) continue;
 			int value = Integer.parseInt(result.get(key));
 			if(key.endsWith(REQ_KEY_QUESTION_FWD_SUFFIX)){
-				if(value>0) king += value;
-				else if(value<0) solder -= value;
+/*				if(value>0) king += value;
+				else */ if(value<0) solder -= value;
 			}else if(key.endsWith(REQ_KEY_QUESTION_REW_SUFFIX)){
-				if(value<0) king -= value;
-				else if(value>0) solder += value;
+/*				if(value<0) king -= value;
+				else */ if(value>0) solder += value;
 			}
 		}
 		return solder;
@@ -350,7 +350,7 @@ public class WorkoutContext implements ViewConstants{
 	
 	public int getScholarScore(){
 		int scholar = 0;
-		int craftsman = 0;
+//		int craftsman = 0;
 		Map<String, String> result = 
 			Utils.getContainsMap(params, REQ_KEY_QUESTION_PREFIX, REQ_KEY_QUESTION_TEST3);
 		if(result==null||result.isEmpty()) return -1;
@@ -361,17 +361,17 @@ public class WorkoutContext implements ViewConstants{
 			int value = Integer.parseInt(result.get(key));
 			if(key.endsWith(REQ_KEY_QUESTION_FWD_SUFFIX)){
 				if(value>0) scholar += value;
-				else if(value<0) craftsman -= value;
+//				else if(value<0) craftsman -= value;
 			}else if(key.endsWith(REQ_KEY_QUESTION_REW_SUFFIX)){
 				if(value<0) scholar -= value;
-				else if(value>0) craftsman += value;
+//				else if(value>0) craftsman += value;
 			}
 		}
 		return scholar;
 	}
 
 	public int getCraftsmanScore(){
-		int scholar = 0;
+//		int scholar = 0;
 		int craftsman = 0;
 		Map<String, String> result = 
 			Utils.getContainsMap(params, REQ_KEY_QUESTION_PREFIX, REQ_KEY_QUESTION_TEST3);
@@ -382,11 +382,11 @@ public class WorkoutContext implements ViewConstants{
 			if(key==null) continue;
 			int value = Integer.parseInt(result.get(key));
 			if(key.endsWith(REQ_KEY_QUESTION_FWD_SUFFIX)){
-				if(value>0) scholar += value;
-				else if(value<0) craftsman -= value;
+/*				if(value>0) scholar += value;
+				else */ if(value<0) craftsman -= value;
 			}else if(key.endsWith(REQ_KEY_QUESTION_REW_SUFFIX)){
-				if(value<0) scholar -= value;
-				else if(value>0) craftsman += value;
+/*				if(value<0) scholar -= value;
+				else */ if(value>0) craftsman += value;
 			}
 		}
 		return craftsman;

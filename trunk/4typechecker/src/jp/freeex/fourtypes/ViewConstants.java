@@ -20,11 +20,19 @@ public interface ViewConstants {
 	public static final String URL_SCHL = "http://www.facebook.com/pages/%EF%BC%94%E3%82%BF%E3%82%A4%E3%83%97/181531745221992#!/pages/%EF%BC%94%E3%82%BF%E3%82%A4%E3%83%97/181531745221992?sk=app_11007063052";
 	public static final String URL_CRFT = "http://www.facebook.com/pages/%EF%BC%94%E3%82%BF%E3%82%A4%E3%83%97/181531745221992#!/pages/%EF%BC%94%E3%82%BF%E3%82%A4%E3%83%97/181531745221992?sk=app_10442206389";
 	*/
+	/*
 	public static final String URL_TOP = "http://www.facebook.com/fourtype";
 	public static final String URL_KING = "http://www.facebook.com/fourtype?sk=app_7146470109";
 	public static final String URL_SOLD = "http://www.facebook.com/fourtype?sk=app_6009294086";
 	public static final String URL_SCHL = "http://www.facebook.com/fourtype?sk=app_11007063052";
 	public static final String URL_CRFT = "http://www.facebook.com/fourtype?sk=app_10442206389";
+	*/
+	public static final String URL_TOP = "/30detail.html";
+	public static final String URL_KING = URL_TOP + "#king";
+	public static final String URL_SOLD = URL_TOP + "#officer";
+	public static final String URL_SCHL = URL_TOP + "#scholar";
+	public static final String URL_CRFT = URL_TOP + "#craftsman";
+	public static final String URL_UNKN = URL_TOP + "#unknown";
 
 	// JSP
 	public static final String JSP_ENTRY = "/01entry.jsp";
