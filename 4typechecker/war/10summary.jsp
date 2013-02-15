@@ -314,7 +314,7 @@
 <tbody>
   <tr>
   	<th　colspan="7" class="nobg">
-	<center><button onClick="javascript:Submit('reentry')">再実行</button></center>
+	<center><input type="button" onClick="javascript:Submit('reentry')">再実行</input></center>
 	</th>
   </tr>
 </tbody>
