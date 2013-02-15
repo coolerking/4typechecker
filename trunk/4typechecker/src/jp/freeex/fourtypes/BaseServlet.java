@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jp.freeex.fourtypes.antiddos.FrequencyManager;
 import jp.freeex.fourtypes.control.Utils;
 import jp.freeex.fourtypes.model.User;
 /**
@@ -64,4 +65,13 @@ public abstract class BaseServlet extends HttpServlet implements ViewConstants{
 		}
 	}
 
+	/**
+	 * 高頻度ユーザのIPアドレスの場合、お断りページへ転送する。
+	 * @param req リクエスト
+	 * @return boolean 真：アクセス頻度上限超過、偽：正常なアクセス
+	 */
+	boolean isHeavyUser(HttpServletRequest req){
+		String ip = req.getRemoteAddr();
+		return FrequencyManager.getInstance().isHeavyAccess(ip);
+	}
 }

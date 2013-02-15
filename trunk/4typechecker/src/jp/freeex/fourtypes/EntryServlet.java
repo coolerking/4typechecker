@@ -13,13 +13,16 @@ public class EntryServlet extends BaseServlet {
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		try{
-			// サブタイトルなしで
-			req.setAttribute(REQ_ATTRKEY_SUBTITLE, " ");
-			
-			// ユーザ情報を作成し、Attributeとして格納
-			req.setAttribute(REQ_ATTRKEY_USER, getUser(req));
-			sendRedirect(JSP_ENTRY, req, resp);
-
+			// DDos対策
+			if(isHeavyUser(req)){
+				sendRedirect(JSP_HEAVYUSER, req, resp);
+			}else{
+				// サブタイトルなしで
+				req.setAttribute(REQ_ATTRKEY_SUBTITLE, " ");
+				// ユーザ情報を作成し、Attributeとして格納
+				req.setAttribute(REQ_ATTRKEY_USER, getUser(req));
+				sendRedirect(JSP_ENTRY, req, resp);
+			}
 		}catch(Exception e){
 			log.log(Level.INFO, "EntryServlet#doGet()処理中例外", e);
 			sendRedirect(JSP_ERROR, req, resp);
@@ -28,13 +31,17 @@ public class EntryServlet extends BaseServlet {
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp){
 		try{
-			// サブタイトルなしで
-			req.setAttribute(REQ_ATTRKEY_SUBTITLE, " ");
+			// DDos対策
+			if(isHeavyUser(req)){
+				sendRedirect(JSP_HEAVYUSER, req, resp);
+			}else{
+				// サブタイトルなしで
+				req.setAttribute(REQ_ATTRKEY_SUBTITLE, " ");
 			
-			// ユーザ情報を作成し、Attributeとして格納
-			req.setAttribute(REQ_ATTRKEY_USER, getUser(req));
-			sendRedirect(JSP_ENTRY, req, resp);
-
+				// ユーザ情報を作成し、Attributeとして格納
+				req.setAttribute(REQ_ATTRKEY_USER, getUser(req));
+				sendRedirect(JSP_ENTRY, req, resp);
+			}
 		}catch(Exception e){
 			log.log(Level.INFO, "EntryServlet#doPost()処理中例外", e);
 			sendRedirect(JSP_ERROR, req, resp);

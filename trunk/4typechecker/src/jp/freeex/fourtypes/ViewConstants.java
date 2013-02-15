@@ -43,6 +43,7 @@ public interface ViewConstants {
 	public static final String JSP_STATUS = "/80status.jsp";
 	public static final String JSP_ERROR = "/99error.jsp";
 	public static final String JSP_NOLINK = "/98error.jsp";
+	public static final String JSP_HEAVYUSER = "/90heavyuser.html";
 	
 	// HTTP Request Attr
 	public static final String REQ_ATTRKEY_USER = "User";

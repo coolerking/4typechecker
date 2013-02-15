@@ -16,12 +16,18 @@ public class StatusServlet extends BaseServlet implements ViewConstants{
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		try{
-			BigTableStoreManager manager = BigTableStoreManager.getInstance();
-			Count c = manager.getCount();
-		
-			req.setAttribute(REQ_KEY_COUNT, c);
-			
-			sendRedirect(JSP_STATUS, req, resp);
+			// DDos対策
+			if(isHeavyUser(req)){
+				sendRedirect(JSP_HEAVYUSER, req, resp);
+			}else{
+				BigTableStoreManager manager = 
+						BigTableStoreManager.getInstance();
+				Count c = manager.getCount();
+
+				req.setAttribute(REQ_KEY_COUNT, c);
+
+				sendRedirect(JSP_STATUS, req, resp);
+			}
 		}catch(Exception e){
 			log.log(Level.INFO, "StatusServlet実行中の例外", e);
 			sendRedirect(JSP_ERROR, req, resp);
@@ -29,6 +35,11 @@ public class StatusServlet extends BaseServlet implements ViewConstants{
 	}
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp){
-		sendRedirect(JSP_NOLINK, req, resp);
+		// DDos対策
+		if(isHeavyUser(req)){
+			sendRedirect(JSP_HEAVYUSER, req, resp);
+		}else{
+			sendRedirect(JSP_NOLINK, req, resp);
+		}
 	}
 }
