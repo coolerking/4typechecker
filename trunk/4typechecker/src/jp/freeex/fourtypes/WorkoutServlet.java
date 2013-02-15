@@ -2,8 +2,6 @@
 
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +13,6 @@ import jp.freeex.fourtypes.model.Question;
 public class WorkoutServlet extends BaseServlet {
 
 	private static final long serialVersionUID = -8524950581332082797L;
-	private Logger log = Logger.getLogger(getClass().getName());
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		sendRedirect(JSP_NOLINK, req, resp);
@@ -91,7 +88,7 @@ public class WorkoutServlet extends BaseServlet {
 			sendRedirect(JSP_WORKOUT, req, resp);
 
 		}catch(Exception e){
-			log.log(Level.INFO, "WorkoutServlet実行中の例外", e);
+			info(getClass().getName(), "WorkoutServlet実行中の例外", e);
 			sendRedirect(JSP_ERROR, req, resp);
 		}
 	}

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jp.freeex.fourtypes.antiddos.FrequencyManager;
 import jp.freeex.fourtypes.control.Utils;
 import jp.freeex.fourtypes.model.User;
 /**
@@ -56,22 +55,27 @@ public abstract class BaseServlet extends HttpServlet implements ViewConstants{
 		try {
 			rd.forward(req, resp);
 		} catch (Exception e) {
-			log.log(Level.INFO, "フォワード中の例外", e);
+			info(getClass().getName(), "フォワード中の例外", e);
 			try {
 				resp.sendRedirect(JSP_ERROR);
 			} catch (IOException ioe) {
-				log.log(Level.INFO, "エラーページへのフォワード中の例外", ioe);				
+				info(getClass().getName(), "エラーページへのフォワード中の例外", ioe);				
 			}
 		}
 	}
 
-	/**
-	 * 高頻度ユーザのIPアドレスの場合、お断りページへ転送する。
-	 * @param req リクエスト
-	 * @return boolean 真：アクセス頻度上限超過、偽：正常なアクセス
-	 */
-	boolean isHeavyUser(HttpServletRequest req){
-		String ip = req.getRemoteAddr();
-		return FrequencyManager.getInstance().isHeavyAccess(ip);
+	void info(String name, String message){
+		log.info("[" + name + "]" + message);
+	}
+	
+	void info(String name, String message, Exception e){
+		log.log(Level.INFO, "[" + name + "]" + message, e);
+	}
+	
+	void warn(String name, String message){
+		log.warning("[" + name + "]" + message);
+	}
+	void warn(String name, String message, Exception e){
+		log.log(Level.INFO,"[" + name + "]" +  message, e);
 	}
 }

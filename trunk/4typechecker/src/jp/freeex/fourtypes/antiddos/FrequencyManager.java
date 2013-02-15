@@ -76,6 +76,8 @@ public class FrequencyManager implements Serializable {
 			try{
 				timeout = Integer.parseInt(propTimeout);
 			}catch(RuntimeException e){
+				log.log(Level.INFO, "Not numeric prop timeout=" + 
+						propTimeout, e);
 			}
 		}
 		
@@ -85,6 +87,8 @@ public class FrequencyManager implements Serializable {
 			try{
 				maxCounts = Integer.parseInt(propMaxCounts);
 			}catch(RuntimeException e){
+				log.log(Level.INFO, "Not numeric prop max counts" + 
+						propMaxCounts, e);
 			}
 		}
 		
@@ -125,15 +129,18 @@ public class FrequencyManager implements Serializable {
 	 * @return boolean 真：超過している、偽：範囲内
 	 */
 	public boolean isHeavyAccess(String ip){
+		log.log(Level.INFO, "isHeavyAccess() arrived ip=[" + ip +"]");
 		Frequency freq = null;
 		Cache cache = CacheManager.getInstance().getCache(CACHE_NAME);
 		freq = (Frequency) cache.get(ip);
 		if(freq==null){
 			freq = new Frequency(timeout, maxCounts);
 			cache.put(ip, freq);
-			log.log(Level.FINE, "create Frequency ip=" + ip);
+			log.log(Level.INFO, "create Frequency ip=" + ip);
 		}
-		return freq.isHeavyAccess();
+		boolean result = freq.isHeavyAccess();
+		log.log(Level.INFO, "isHeavyAccess() returns " + result);
+		return result;
 	}
 
 	/**
@@ -181,7 +188,7 @@ public class FrequencyManager implements Serializable {
 			if(System.currentTimeMillis()>(createdAtMills+timeoutMills)){
 				count = 0;
 				createdAtMills = System.currentTimeMillis();
-				log.log(Level.FINE, "Frequency reseted");
+				log.log(Level.INFO, "Frequency reseted");
 				return true;
 			}
 			// カウンタを1加算し最大カウント回数を超過したかどうかbooleanを返却する
