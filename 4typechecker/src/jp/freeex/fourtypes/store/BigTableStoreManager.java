@@ -1,15 +1,10 @@
 ﻿package jp.freeex.fourtypes.store;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
-import javax.jdo.Transaction;
 
-
-
-import jp.freeex.fourtypes.ViewConstants;
 import jp.freeex.fourtypes.control.WorkoutContext;
 import jp.freeex.fourtypes.model.Count;
 import jp.freeex.fourtypes.model.PersonalSummary;
@@ -35,14 +30,15 @@ public class BigTableStoreManager {
 	}
 	
 	public void doStore(WorkoutContext con){
-		if(!store) return;
+		if(!store){
+			log.info("store init option off, ignore saving result");
+			return;
+		}
 		PersonalSummary sum = new PersonalSummary();
 		User user = con.getUser();
 		sum.setName(user.getName());
 		sum.setAge(user.getAge());
 		sum.setMale(user.isMale());
-// bug fixed 2012/05/09
-//		sum.setKingOrSolderScore(con.getScholarOrCraftsmanScore());
 		sum.setKingOrSolderScore(con.getKingOrSolderScore());
 		sum.setScholarOrCraftsmanScore(con.getScholarOrCraftsmanScore());
 		sum.setKingScore(con.getKingScore());
@@ -53,80 +49,48 @@ public class BigTableStoreManager {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		try{
 			pm.makePersistent(sum);
-			//log.info("Result:" +sum.toString());
+			log.info("saving result:" +sum.toString());
 		}finally{
 			pm.close();
 		}
 	}
 
-	public Count getCount(WorkoutContext con){
-		PersistenceManagerFactory pmf = PMF.get();
-		PersistenceManager pm = null;
-		try{
-			pm = pmf.getPersistenceManager();
-			Transaction tx = pm.currentTransaction();
-			Count c = null;
-			try{
-				tx.begin();
-				try{
-					c = pm.getObjectById(Count.class, ViewConstants.PRIMARYKEY_ID);
-				}catch(Exception e){
-					log.log(Level.INFO, "Count 取得中例外", e);
-					c = new Count();
-				}
-				c.setTotal(c.getTotal() + 1);
-				if(con.getKingOrSolderScore()>con.getScholarOrCraftsmanScore()){
-					c.setKingOrSolder(c.getKingOrSolder() + 1);
-					if(con.getKingScore()>con.getSolderScore()){
-						c.setKing(c.getKing() + 1);
-					}else if(con.getKingScore()<con.getSolderScore()){
-						c.setSolder(c.getSolder() + 1);
-					}
-					
-				}else if(con.getKingOrSolderScore()<con.getScholarOrCraftsmanScore()){
-					c.setScholarOrCraftsman(c.getScholarOrCraftsman() + 1);
-					if(con.getScholarScore()>con.getCraftsmanScore()){
-						c.setScholar(c.getScholar() + 1);
-					}else if(con.getScholarScore()<con.getCraftsmanScore()){
-						c.setCraftsman(c.getCraftsman() + 1);
-					}
-				}
-				pm.makePersistent(c);
-				
-				tx.commit();
-				log.info("Count:" + c.toString());
-				return c;
-			}finally{
-				if(tx.isActive()) tx.rollback();
+	public synchronized Count getCount(WorkoutContext con){
+		Count c = getCount();
+		
+		// コンテキスト上の1件を追加する処理
+		c.setTotal(c.getTotal() + 1);
+		
+		// 外向的な場合
+		if(con.getKingOrSolderScore()>con.getScholarOrCraftsmanScore()){
+			c.setKingOrSolder(c.getKingOrSolder() + 1);
+
+			// 注目型の場合
+			if(con.getKingScore()>con.getSolderScore()){
+				c.setKing(c.getKing() + 1);
+
+			// 司令型の場合
+			}else if(con.getKingScore()<con.getSolderScore()){
+				c.setSolder(c.getSolder() + 1);
 			}
-		}finally{
-			if(pm!=null) pm.close();
+
+		// 内向的な場合
+		}else if(con.getKingOrSolderScore()<con.getScholarOrCraftsmanScore()){
+			c.setScholarOrCraftsman(c.getScholarOrCraftsman() + 1);
+
+			// 法則型の場合
+			if(con.getScholarScore()>con.getCraftsmanScore()){
+				c.setScholar(c.getScholar() + 1);
+
+			// 理想型の場合
+			}else if(con.getScholarScore()<con.getCraftsmanScore()){
+				c.setCraftsman(c.getCraftsman() + 1);
+			}
 		}
+		return c;
 	}
 	
-	public Count getCount(){
-		PersistenceManagerFactory pmf = PMF.get();
-		PersistenceManager pm = null;
-		try{
-			pm = pmf.getPersistenceManager();
-			Transaction tx = pm.currentTransaction();
-			Count c = null;
-			try{
-				tx.begin();
-				try{
-					c = pm.getObjectById(Count.class, ViewConstants.PRIMARYKEY_ID);
-				}catch(Exception e){
-					log.log(Level.INFO, "Count 取得中例外", e);
-					c = new Count();
-				}
-				tx.commit();
-				log.info("Count:" + c.toString());
-				return c;
-			}finally{
-				if(tx.isActive()) tx.rollback();
-			}
-		}finally{
-			if(pm!=null) pm.close();
-		}
+	public synchronized Count getCount(){
+		return CountManager.getInstance().getCount();
 	}
 }

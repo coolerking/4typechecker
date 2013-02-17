@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blacklistentries>
+	<blacklist>
+	<subnet>2.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>3.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>4.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>5.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>6.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>7.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>8.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>9.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>10.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>11.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>12.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>13.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>15.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>16.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>17.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>18.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>19.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>20.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>21.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>22.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>23.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>24.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>25.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>26.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>28.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>29.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>30.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>31.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>32.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>33.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>34.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>35.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>37.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>38.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>40.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>41.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>44.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>45.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>46.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>47.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>48.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>50.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>51.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>52.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>53.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>54.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>55.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>56.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>56.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>57.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>62.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>63.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>64.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>65.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>66.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>67.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>68.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>69.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>70.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>71.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>72.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>73.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>74.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>75.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>76.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>77.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>78.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>79.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>80.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>81.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>82.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>83.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>84.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>85.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>86.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>87.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>88.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>89.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>90.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>91.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>92.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>93.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>94.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>95.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>96.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>97.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>98.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>99.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>100.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>102.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>104.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>105.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>107.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>108.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>128.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>135.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>140.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>145.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>149.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+	<blacklist>
+	<subnet>151.0.0.0/8</subnet>
+	<description>www.cgis.biz/tools/access/ not japan omit</description>
+	</blacklist>
+</blacklistentries>
