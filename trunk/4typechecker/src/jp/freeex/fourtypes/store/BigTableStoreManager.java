@@ -87,6 +87,7 @@ public class BigTableStoreManager {
 				c.setCraftsman(c.getCraftsman() + 1);
 			}
 		}
+		CountManager.getInstance().setCount(c);
 		return c;
 	}
 	
