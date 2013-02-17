@@ -19,6 +19,16 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<security-constraint>
+		<web-resource-collection>
+			<url-pattern>/cron/*</url-pattern>
+			<url-pattern>/status</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
 	<servlet>
 		<servlet-name>entry</servlet-name>
 		<servlet-class>jp.freeex.fourtypes.EntryServlet</servlet-class>
@@ -42,6 +52,10 @@
  	<servlet>
 		<servlet-name>estimate</servlet-name>
 		<servlet-class>jp.freeex.fourtypes.EstimateServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>savecount</servlet-name>
+		<servlet-class>jp.freeex.fourtypes.SaveCountServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -67,6 +81,10 @@
 	<servlet-mapping>
 		<servlet-name>estimate</servlet-name>
 		<url-pattern>/estimate</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>savecount</servlet-name>
+		<url-pattern>/cron/savecount</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>01entry.jsp</welcome-file>

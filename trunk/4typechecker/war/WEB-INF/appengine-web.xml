@@ -14,7 +14,7 @@
 		<!-- please change value when you want to change test master -->
 		<property name="type4.currentmaster" value="jp.freeex.fourtypes.master.TestMaster20110203"/>
 		<!-- comment out to deny store results -->
-		<property name="type4.store" value="true"/>
+		<property name="type4.store" value="false"/>
 		<!-- because of Google mail api limit <=100 -->
 		<property name="type4.store.mail" value="false"/>
 		<!-- please comment out if no need to send each result -->
