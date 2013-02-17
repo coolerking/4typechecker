@@ -1,6 +1,7 @@
 package jp.freeex.fourtypes.store;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -71,13 +72,35 @@ public class CountManager implements Serializable {
 			cMan.registerCache(CACHE_NAME, cache);
 
 			// DBからカウンタ情報取得
-			Count count = retrieveCount();
-			if(count!=null){
-				cache.put(CACHEKEY_COUNT, count);
+			Count count = null;
+			try{
+				count = retrieveCount();
+			}catch(Exception e){
+				count = new Count();
+				count.setTotal(41696);
+				Calendar cal = Calendar.getInstance();
+				cal.set(Calendar.YEAR, 2010);
+				cal.set(Calendar.MONTH, 8);
+				cal.set(Calendar.DAY_OF_MONTH, 6);
+				cal.set(Calendar.HOUR_OF_DAY, 14);
+				cal.set(Calendar.MINUTE, 1);
+				cal.set(Calendar.SECOND, 41);
+				cal.set(Calendar.MILLISECOND, 177);
+				count.setCreatedAt(cal.getTime());
+				count.setKing(4402);
+				count.setSolder(2651);
+				count.setScholar(11600);
+				count.setCraftsman(17191);
+				count.setKingOrSolder(7864);
+				count.setScholarOrCraftsman(31795);
 				log.log(Level.INFO, 
-						"[CountCacheManager] set cache from bigtable :" + 
-						count.toString());
+						"[constructor] DB exception so create count dummy as " + 
+						count.toString(), e);
 			}
+			cache.put(CACHEKEY_COUNT, count);
+			log.log(Level.INFO, 
+					"[CountCacheManager] set cache from bigtable :" + 
+					count.toString());
 		}catch(CacheException e){
 			log.log(Level.WARNING, 
 					"[CountCacheManager] exception in constructor", e);
@@ -131,5 +154,11 @@ public class CountManager implements Serializable {
 			cache.put(CACHEKEY_COUNT, count);
 		}
 		return count;
+	}
+	
+	public void setCount(Count count){
+		Cache cache = CacheManager.getInstance().getCache(CACHE_NAME);
+		cache.put(CACHEKEY_COUNT, count);
+		log.log(Level.INFO, "cache in count:" + count.toString());
 	}
 }
