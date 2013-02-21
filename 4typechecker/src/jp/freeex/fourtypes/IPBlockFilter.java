@@ -32,6 +32,9 @@ public class IPBlockFilter implements Filter {
 		if(IPUtils.isJapaneseIP(ip)){
 			log.log(Level.INFO, "ip=[" + ip + "] is Japanese domain");
 			chain.doFilter(req, resp);
+		}else if("0.1.0.1".equals(ip)){
+			log.log(Level.INFO, "ip=[" + ip + "] is used for cron caller");
+			chain.doFilter(req, resp);
 		}else{
 			log.log(Level.INFO, "ip=[" + ip + "] is not Japanese domain");
 			resp.setContentType("text/html; charset=Shift_JIS");
