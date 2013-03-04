@@ -98,6 +98,9 @@ public class TestButtonPanel extends HorizontalPanel implements TextConst{
 				// 正値の場合、注目／司令テスト画面を構成
 				}else if(y>0) showExtrovertTestPage(y);
 				else showIntrovertTestPage(y);
+				
+				// 一番上までスクロールを戻す
+				Window.scrollTo(0, 0);
 
 				GWT.log("[TestButtonPanel:1st:constructor:NEXT:onClick()]" +
 						" end: " + (System.currentTimeMillis() - elapseNext) + 
@@ -248,7 +251,6 @@ public class TestButtonPanel extends HorizontalPanel implements TextConst{
 	
 	public void showResultPage(int x, int y){
 		// サブタイトル変更
-		//TODO 色つける
 		final HTML subtitle = 
 				new HTML("<font=\"+2\"><b>"+ SUBT_RESULT_PREFIX +
 						"<font color=\"" +
@@ -292,6 +294,7 @@ public class TestButtonPanel extends HorizontalPanel implements TextConst{
 						"onClick()] start");
 				FourTypes fourTypes = new FourTypes();
 				fourTypes.showTopPage();
+				Window.scrollTo(0, 0);
 				GWT.log("[TestButtonPanel:2nd-con>NEXT>RETRY:" +
 						"onClick()] end: " + 
 						(System.currentTimeMillis() - elapseRetry) + 

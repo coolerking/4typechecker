@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+	<cron>
+		<url>/cron/results</url>
+		<description>Repopulate the results cache every day 0:00</description>
+		<schedule>every day 0:00</schedule>
+	</cron>
+		<cron>
+		<url>/cron/summary</url>
+		<description>Repopulate the summary cache every 2 hours</description>
+		<schedule>every 2 hours</schedule>
+	</cron>
+</cronentries>
