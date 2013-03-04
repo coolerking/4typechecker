@@ -6,9 +6,10 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.TreeSet;
 
+import jp.freeex.fourtypes.shared.HTMLConst;
 import jp.freeex.fourtypes.shared.Utils;
 
-public class ClientUtils implements HTMLConst{
+public class ClientUtils implements HTMLConst, TextConst{
 	/**
 	 * 長さに合わせたint型配列を順番バラバラで格納して渡す。
 	 * 各int値は競合せず、0からlength-1までの数字が格納される。
@@ -143,6 +144,19 @@ public class ClientUtils implements HTMLConst{
 		buf.append("</a>");
 		return buf.toString();
 	}
+	
+	public static final String getTooltipMsg(int x, int y){
+		StringBuffer buf = new StringBuffer();
+		buf.append(TTP_PREFIX);
+		buf.append(x);
+		buf.append(TTP_SEP);
+		buf.append(y);
+		buf.append(TTP_X);
+		if(y>0) buf.append(TBL_2ND_EXT);
+		else buf.append(TBL_2ND_INT);
+		buf.append(TTP_SUFFIX);
+		return buf.toString();
+	}
 
 	/**
 	 * 統計チャートURL文字列を作成する。
@@ -206,10 +220,10 @@ public class ClientUtils implements HTMLConst{
 	 */
 	public static String getAboutFourType(){
 		StringBuffer buf = new StringBuffer();
-		buf.append("<a href=/");
+		buf.append("<a href=\"");
 		buf.append(URL_ENQ);
 		buf.append("\" target=\"_blank\">");
-		buf.append("4タイプ判定テストのご意見をお聞かせください");
+		buf.append(FOT_ENG_MSG);
 		buf.append("</a>");
 		return buf.toString();
 	}

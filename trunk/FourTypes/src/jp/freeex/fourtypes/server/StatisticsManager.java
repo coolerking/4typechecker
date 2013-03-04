@@ -184,4 +184,15 @@ public class StatisticsManager implements Serializable {
 				(System.currentTimeMillis() - elapse) + "mSec.");
 		return summary;
 	}
+	
+	public void clearResults(){
+		long elapse = System.currentTimeMillis();
+		log.info("[StatisticsManager#clearResults()] start");
+		// キャッシュ上のすべての結果をリストへ移動
+		Cache cache = 
+				CacheManager.getInstance().getCache(C_NAME);
+		cache.put(C_KEY_RESULTS, new Results());
+		log.info("[StatisticsManager#clearResults()] end: " +
+				(System.currentTimeMillis() - elapse) + "mSec.");
+	}
 }

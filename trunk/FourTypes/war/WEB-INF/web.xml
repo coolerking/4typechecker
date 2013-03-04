@@ -1,25 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee                http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>admin_use_only</web-resource-name>
+			<url-pattern>/cron/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+
 	<!-- Servlets -->
-<!-- 
-	<servlet>
-		<servlet-name>greetServlet</servlet-name>
-		<servlet-class>jp.freeex.fourtypes.server.GreetingServiceImpl</servlet-class>
-	</servlet>
--->
+
 	<servlet>
 		<servlet-name>statServlet</servlet-name>
 		<servlet-class>jp.freeex.fourtypes.server.StatisticsServiceImpl</servlet-class>
 	</servlet>
-<!-- 
-	<servlet-mapping>
-		<servlet-name>greetServlet</servlet-name>
-		<url-pattern>/fourtypes/greet</url-pattern>
-	</servlet-mapping>
--->
+	<servlet>
+		<servlet-name>resultsCron</servlet-name>
+		<servlet-class>jp.freeex.fourtypes.server.ResultsCronService</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>summaryCron</servlet-name>
+		<servlet-class>jp.freeex.fourtypes.server.SummaryCronService</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>statServlet</servlet-name>
 		<url-pattern>/fourtypes/stat</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>resultsCron</servlet-name>
+		<url-pattern>/cron/results</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>summaryCron</servlet-name>
+		<url-pattern>/cron/summary</url-pattern>
 	</servlet-mapping>
 
 	<!-- Default page to serve -->

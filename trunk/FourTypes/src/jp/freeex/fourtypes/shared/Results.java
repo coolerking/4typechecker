@@ -82,8 +82,8 @@ public class Results implements Serializable {
 		for(long[] result: results){
 			if(buf.length()>0) buf.append(SEP_ELEMENTS);
 			buf.append(result[0]).append(SEP_COORDINATES);
-			buf.append(result[0]).append(SEP_COORDINATES);
-			buf.append(result[0]);
+			buf.append(result[1]).append(SEP_COORDINATES);
+			buf.append(result[2]);
 		}
 		return buf.toString();
 	}

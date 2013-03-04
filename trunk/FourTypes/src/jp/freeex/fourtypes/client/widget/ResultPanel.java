@@ -1,35 +1,40 @@
 package jp.freeex.fourtypes.client.widget;
 
-import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.List;
 
 import jp.freeex.fourtypes.client.ClientUtils;
 import jp.freeex.fourtypes.client.StatisticsService;
 import jp.freeex.fourtypes.client.StatisticsServiceAsync;
+import jp.freeex.fourtypes.client.TextConst;
+import jp.freeex.fourtypes.shared.HTMLConst;
 import jp.freeex.fourtypes.shared.Summary;
 import jp.freeex.fourtypes.shared.Utils;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.LoadEvent;
-import com.google.gwt.event.dom.client.LoadHandler;
+import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class ResultPanel extends VerticalPanel {
+public class ResultPanel extends VerticalPanel implements TextConst, HTMLConst{
 	
 	private ResultPanel resultPanel = null;
+	private final StatisticsServiceAsync service = 
+			(StatisticsServiceAsync)GWT.create(StatisticsService.class);
 	
 	public ResultPanel(final int x, final int y){
 		super();
 		long elapse = System.currentTimeMillis();
 		GWT.log("[ResultPanel:constructor] start");
 
+		((ServiceDefTarget)service).setServiceEntryPoint(
+				GWT.getHostPageBaseURL() + URL_SERVICE);
 
 		// 匿名インナークラス受渡し用変数へ格納する
 		this.resultPanel = this;
@@ -38,20 +43,31 @@ public class ResultPanel extends VerticalPanel {
 		//final Context2d ctx = null;
 		if(canvas==null){
 			GWT.log("[ResultPanel:constructor] canvas not support");
-			Label sorry = new Label();
-			sorry.setText("HTML5非対応ブラウザのため、グラフ表示できませんでした。" +
-					"\nあなたの座標(x, y)=(" + x + ", " + y + 
-					")");
-			this.add(sorry);
-			GWT.log("[ResultPanel:constructor] added sorry label");
+			// テーブルで代替
+			FlexTable resultTbl = new FlexTable();
+			if(y>0) resultTbl.setText(0,  0, TBL_2ND_EXT + TBL_COORD_X);
+			else resultTbl.setText(0,  1, TBL_2ND_EXT + TBL_COORD_X);
+			resultTbl.setText(0,  1, TBL_1ST + TBL_COORD_Y);
+
+			resultTbl.setText(1, 0, Integer.toString(x));
+			resultTbl.setText(1, 1, Integer.toString(y));
+			resultTbl.setBorderWidth(1);
+			resultTbl.setStyleName("center");
+
+			this.add(resultTbl);
+			GWT.log("[ResultPanel:constructor] added table");
 		}else{
+//		if(canvas!=null){
 			canvas.setCoordinateSpaceWidth(400);
 			canvas.setCoordinateSpaceHeight(400);
 			Context2d ctx = canvas.getContext2d();
-			//createRader(ctx, firstScore, secondScore);
+			// グラフベースを描画
 			ResultPanel.drawGraphBase(ctx);
+			// 結果を描画
 			ResultPanel.writePoint(ctx, x, y, 5, 
 					Utils.getTypeColor(y, x));
+			// ツールチップでスコア詳細をだす
+			canvas.setTitle(ClientUtils.getTooltipMsg(x, y));
 			this.add(canvas);
 			GWT.log("[ResultPanel:constructor] added rader canvas");
 		}
@@ -59,69 +75,7 @@ public class ResultPanel extends VerticalPanel {
 		// 非同期で統計情報を表示する
 		GWT.log("[ResultPanel:constructor] prepare requesting summary " +
 				"to server");
-		final StatisticsServiceAsync service =
-				(StatisticsServiceAsync)GWT.create(
-						StatisticsService.class);
-		((ServiceDefTarget)service).setServiceEntryPoint(
-				GWT.getHostPageBaseURL() + "fourtypes/statistics");
-		GWT.log("[ResultPanel:constructor] start requesting summary to server");
-		// サーバへサマリ情報を要求する
-		service.getSummary(new AsyncCallback<Summary>(){
-			/**
-			 * サマリ取得失敗時の処理。
-			 * 何もしない
-			 * @param caught 発生した例外
-			 */
-			@Override
-			public void onFailure(Throwable caught) {
-				GWT.log("[ResultPanel:constructor>Async:onFailure()] called",
-						caught);
-			}
 
-			/**
-			 * サマリ結果を受領した時呼び出される処理。
-			 * 結果を元に結果パネルへ情報追加する
-			 * @param result サマリを表す文字列
-			 */
-			@Override
-			public void onSuccess(Summary sum) {
-				final long elapseSum = System.currentTimeMillis();
-				GWT.log("[ResultPanel:constructor>Async:SUMMARY:onSuccess()]" +
-						" start");
-				int total = sum.getTotal();
-				int king = sum.getKing();
-				int sold = sum.getSolder();
-				int scho = sum.getScholar();
-				int crft = sum.getCraftsman();
-				try{
-					final Image sumGraph = new Image(
-								ClientUtils.getSummaryChart(
-										total, king, sold, scho, crft));
-					sumGraph.addLoadHandler(new LoadHandler(){
-						@Override
-						public void onLoad(LoadEvent event) {
-							GWT.log("[ResultPanel:constructor>Async:SUMMARY:" +
-									"onSuccess():Image:onLoad()] start");
-							HTML space = new HTML(ClientUtils.getNewLine() + 
-									ClientUtils.getNewLine());
-							resultPanel.add(space);
-							resultPanel.add(sumGraph);
-							GWT.log("[ResultPanel:constructor>Async:SUMMARY" +
-									"onSuccess():Image:onLoad()] end: " + 
-									(System.currentTimeMillis() - elapseSum) + 
-									"mSec.");
-						}
-					});
-
-				}catch(UnsupportedEncodingException e){
-					GWT.log("[ResultPanel:constructor>Async:SUMMARY:" +
-							"onSuccess()] unsupported utf-8", e);
-				}
-				GWT.log("[ResultPanel:constructor>Async:SUMMARY:onSuccess" +
-						"()] end" + 
-						(System.currentTimeMillis() - elapseSum) + "mSec.");
-			} // end of onSuccess(): ASYNC getSummary()
-		}); // end of ASYNC getSummary()
 		
 		if(canvas!=null){
 			service.getResults(new AsyncCallback<List<long[]>>(){
@@ -147,6 +101,9 @@ public class ResultPanel extends VerticalPanel {
 				}
 			});
 		}
+		
+		// 統計情報が取得できた場合は表示
+		drawSummary();
 		GWT.log("[ResultPanel:constructor] end:" + 
 				(System.currentTimeMillis() - elapse) + "mSec.");
 	}
@@ -257,6 +214,8 @@ public class ResultPanel extends VerticalPanel {
 			Context2d ctx, List<long[]> coordinates){
 		int pos=0;
 		for(long[] coordinate: coordinates){
+			GWT.log("ResultPanel#writeGrayPoint()] pos=" + pos +": (x,y)=(" + 
+					coordinate[0] +", " + coordinate[1] + ")");
 			ResultPanel.writePoint(
 					ctx, 
 					(int)coordinate[0], (int)coordinate[1], 
@@ -275,6 +234,7 @@ public class ResultPanel extends VerticalPanel {
 		color.append(",");
 		color.append(point);
 		color.append(")");
+		GWT.log("[ResultPanel#getGray()] :" + color.toString());
 		return color.toString();
 	}
 
@@ -287,5 +247,99 @@ public class ResultPanel extends VerticalPanel {
 		ctx.setFillStyle(color);
 		ctx.arc(xCoord, yCoord, radius, 0, Math.PI * 2, true);
 		ctx.fill();
+		GWT.log("[ResultPanel#writePoint] (x, y)=(" + xCoord + ", " + 
+				yCoord + ", rad=" + radius + ", color=" + color);
+	}
+	
+	private void drawSummary(){
+		GWT.log("[ResultPanel#drawSummary()] start");
+		// サーバへサマリ情報を要求する
+		service.getSummary(new AsyncCallback<Summary>(){
+			/**
+			 * サマリ取得失敗時の処理。
+			 * 何もしない
+			 * @param caught 発生した例外
+			 */
+			@Override
+			public void onFailure(Throwable caught) {
+				GWT.log("[ResultPanel#drawSummary()>Async:onFailure()] called",
+						caught);
+			}
+
+			/**
+			 * サマリ結果を受領した時呼び出される処理。
+			 * 結果を元に結果パネルへ情報追加する
+			 * @param result サマリを表す文字列
+			 */
+			@Override
+			public void onSuccess(Summary sum) {
+				final long elapseSum = System.currentTimeMillis();
+				GWT.log("[ResultPanel#drawSummary()>Async:SUMMARY:onSuccess()]" +
+						" start: summary=" + sum);
+				if(sum.getTotal()<=0){
+					GWT.log("[ResultPanel#drawSummary()>Async:SUMMARY:" +
+							"onSuccess()] no summary ignore");
+					return;
+				}
+				
+				List<Summary> sums = Arrays.asList(sum);
+
+				CellTable<Summary> statTbl = new CellTable<Summary>();
+				TextColumn<Summary> kingCol = new TextColumn<Summary>(){
+					@Override
+					public String getValue(Summary sum) {
+						return Integer.toString(sum.getKing());
+					}
+				};
+				statTbl.addColumn(kingCol, Utils.TYPE_KING);
+				TextColumn<Summary> soldCol = new TextColumn<Summary>(){
+					@Override
+					public String getValue(Summary sum) {
+						return Integer.toString(sum.getSolder());
+					}
+				};
+				statTbl.addColumn(soldCol, Utils.TYPE_SOLD);
+				TextColumn<Summary> schoCol = new TextColumn<Summary>(){
+					@Override
+					public String getValue(Summary sum) {
+						return Integer.toString(sum.getScholar());
+					}
+				};
+				statTbl.addColumn(schoCol, Utils.TYPE_SCHO);
+				TextColumn<Summary> crftCol = new TextColumn<Summary>(){
+					@Override
+					public String getValue(Summary sum) {
+						return Integer.toString(sum.getCraftsman());
+					}
+				};
+				statTbl.addColumn(crftCol, Utils.TYPE_CRFT);
+				TextColumn<Summary> othrCol = new TextColumn<Summary>(){
+					@Override
+					public String getValue(Summary sum) {
+						return Integer.toString(sum.getTotal()-sum.getKing() - 
+								sum.getSolder() - sum.getScholar() - 
+								sum.getCraftsman());
+					}
+				};
+				statTbl.addColumn(othrCol, SUM_OTHERS);
+				TextColumn<Summary> totlCol = new TextColumn<Summary>(){
+					@Override
+					public String getValue(Summary sum) {
+						return Integer.toString(sum.getTotal());
+					}
+				};
+				statTbl.addColumn(totlCol, SUM_TOTAL);
+				statTbl.setRowCount(sums.size(), true);
+				statTbl.setRowData(0, sums);
+				resultPanel.add(new HTML(ClientUtils.getNewLine()));
+				resultPanel.add(new HTML(ClientUtils.getNewLine()));
+				resultPanel.setTitle(TTP_SUMMARY);
+				resultPanel.add(statTbl);
+
+				GWT.log("[ResultPanel:constructor>Async:SUMMARY:onSuccess" +
+						"()] end" + 
+						(System.currentTimeMillis() - elapseSum) + "mSec.");
+			}
+		});
 	}
 }
