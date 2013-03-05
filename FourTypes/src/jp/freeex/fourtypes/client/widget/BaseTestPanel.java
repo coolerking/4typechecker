@@ -7,7 +7,10 @@ import jp.freeex.fourtypes.client.q.Question;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.VerticalPanel;
-
+/**
+ * テストパネルの基底クラス。
+ * @author tasuku
+ */
 public abstract class BaseTestPanel extends VerticalPanel {
 	/**
 	 * 質問テーブルリスト（採点時に使用する）

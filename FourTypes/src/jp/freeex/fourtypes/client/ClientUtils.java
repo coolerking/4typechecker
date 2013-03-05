@@ -6,10 +6,10 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.TreeSet;
 
-import jp.freeex.fourtypes.shared.HTMLConst;
+import jp.freeex.fourtypes.shared.Const;
 import jp.freeex.fourtypes.shared.Utils;
 
-public class ClientUtils implements HTMLConst, TextConst{
+public class ClientUtils implements Const{
 	/**
 	 * 長さに合わせたint型配列を順番バラバラで格納して渡す。
 	 * 各int値は競合せず、0からlength-1までの数字が格納される。
@@ -98,13 +98,13 @@ public class ClientUtils implements HTMLConst, TextConst{
 		StringBuffer buf = new StringBuffer();
 		buf.append("<a href=\"");
 		buf.append(URL_BASE);
-		if(Utils.TYPE_KING.equals(type)){
+		if(TYPE_KING.equals(type)){
 			buf.append(NAME_KING);
-		}else if(Utils.TYPE_SOLD.equals(type)){
+		}else if(TYPE_SOLD.equals(type)){
 			buf.append(NAME_SOLD);
-		}else if(Utils.TYPE_SCHO.equals(type)){
+		}else if(TYPE_SCHO.equals(type)){
 			buf.append(NAME_SCHO);
-		}else if(Utils.TYPE_CRFT.equals(type)){
+		}else if(TYPE_CRFT.equals(type)){
 			buf.append(NAME_CRFT);
 		}else{
 			buf.append(NAME_ABSTRACT);
@@ -128,13 +128,13 @@ public class ClientUtils implements HTMLConst, TextConst{
 		StringBuffer buf = new StringBuffer();
 		buf.append("<a href=\"");
 		buf.append(URL_BASE);
-		if(Utils.TYPE_KING.equals(type)){
+		if(TYPE_KING.equals(type)){
 			buf.append(NAME_KING);
-		}else if(Utils.TYPE_SOLD.equals(type)){
+		}else if(TYPE_SOLD.equals(type)){
 			buf.append(NAME_SOLD);
-		}else if(Utils.TYPE_SCHO.equals(type)){
+		}else if(TYPE_SCHO.equals(type)){
 			buf.append(NAME_SCHO);
-		}else if(Utils.TYPE_CRFT.equals(type)){
+		}else if(TYPE_CRFT.equals(type)){
 			buf.append(NAME_CRFT);
 		}else{
 			buf.append(NAME_ABSTRACT);
@@ -145,6 +145,12 @@ public class ClientUtils implements HTMLConst, TextConst{
 		return buf.toString();
 	}
 	
+	/**
+	 * 結果グラフのツールチップ文字列を作成する
+	 * @param x X座標
+	 * @param y Y座標
+	 * @return ツールチップ用文字列
+	 */
 	public static final String getTooltipMsg(int x, int y){
 		StringBuffer buf = new StringBuffer();
 		buf.append(TTP_PREFIX);
@@ -191,13 +197,13 @@ public class ClientUtils implements HTMLConst, TextConst{
 		buf.append("&amp;chs=500x250");
 		buf.append("&amp;chf=bg,s,E6EAE9");
 		buf.append("&amp;chl=");
-		buf.append(ClientUtils.toUTF8(Utils.TYPE_KING));
+		buf.append(ClientUtils.toUTF8(TYPE_KING));
 		buf.append("|");
-		buf.append(ClientUtils.toUTF8(Utils.TYPE_SOLD));
+		buf.append(ClientUtils.toUTF8(TYPE_SOLD));
 		buf.append("|");
-		buf.append(ClientUtils.toUTF8(Utils.TYPE_SCHO));
+		buf.append(ClientUtils.toUTF8(TYPE_SCHO));
 		buf.append("|");
-		buf.append(ClientUtils.toUTF8(Utils.TYPE_CRFT));
+		buf.append(ClientUtils.toUTF8(TYPE_CRFT));
 		buf.append("|");
 		buf.append(ClientUtils.toUTF8("その他"));
 		return buf.toString();

@@ -1,7 +1,11 @@
 package jp.freeex.fourtypes.server;
 
 import java.math.BigInteger;
-
+/**
+ * サーバ側のみで使用するユーティリティ。
+ * sharedやclientパッケージから使用不可(コンパイルは徹がRuntimeException)。
+ * @author tasuku
+ */
 public class ServerUtils {
 	/**
 	 * 日本国内に割り当てられたIPネットアドレス、ネットマスク
@@ -2869,7 +2873,9 @@ public class ServerUtils {
 		{"223.223.208.0", "21"},
 		{"223.223.224.0", "19"}
 	};
-	
+	/**
+	 * cron呼び出し元IPアドレス
+	 */
 	public static final String CRON_KICKER = "0.1.0.1";
 	
 	/**
@@ -3050,6 +3056,12 @@ public class ServerUtils {
 		return br;
 	}
 
+	/**
+	 * byteのアンド処理。
+	 * @param b1　ターゲット
+	 * @param b2 ターゲット
+	 * @return　結果
+	 */
 	static byte[] byteAND(byte[] b1,byte[] b2){
 		byte[] r = new byte[b1.length];
 		for(int i=0;i < r.length;i++){
@@ -3058,6 +3070,12 @@ public class ServerUtils {
 		return r;
 	}
 
+	/**
+	 * byteのオア処理。
+	 * @param b1　ターゲット
+	 * @param b2 ターゲット
+	 * @return　結果
+	 */
 	static byte[] byteOR(byte[] b1,byte[] b2){
 		byte[] r = new byte[b1.length];
 		for(int i=0;i < r.length;i++){
@@ -3066,6 +3084,12 @@ public class ServerUtils {
 		return r;
 	}
 
+	/**
+	 * byteのXOR処理。
+	 * @param b1　ターゲット
+	 * @param b2 ターゲット
+	 * @return　結果
+	 */
 	static byte[] byteXOR(byte[] b1,byte[] b2){
 		byte[] r = new byte[b1.length];
 		for(int i=0;i < r.length;i++){

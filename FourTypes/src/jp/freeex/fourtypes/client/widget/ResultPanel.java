@@ -6,8 +6,7 @@ import java.util.List;
 import jp.freeex.fourtypes.client.ClientUtils;
 import jp.freeex.fourtypes.client.StatisticsService;
 import jp.freeex.fourtypes.client.StatisticsServiceAsync;
-import jp.freeex.fourtypes.client.TextConst;
-import jp.freeex.fourtypes.shared.HTMLConst;
+import jp.freeex.fourtypes.shared.Const;
 import jp.freeex.fourtypes.shared.Summary;
 import jp.freeex.fourtypes.shared.Utils;
 
@@ -21,13 +20,26 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
-
-public class ResultPanel extends VerticalPanel implements TextConst, HTMLConst{
-	
+/**
+ * 結果パネルクラス。
+ * @author tasuku
+ */
+public class ResultPanel extends VerticalPanel implements Const{
+	/**
+	 * 結果パネルインスタンス
+	 */
 	private ResultPanel resultPanel = null;
+	/**
+	 * 統計サービスインスタンス。
+	 */
 	private final StatisticsServiceAsync service = 
 			(StatisticsServiceAsync)GWT.create(StatisticsService.class);
 	
+	/**
+	 * 結果パネルを構成し、再実行ボタンのアクションを定義する。
+	 * @param x X座標
+	 * @param y Y座標
+	 */
 	public ResultPanel(final int x, final int y){
 		super();
 		long elapse = System.currentTimeMillis();
@@ -108,12 +120,15 @@ public class ResultPanel extends VerticalPanel implements TextConst, HTMLConst{
 				(System.currentTimeMillis() - elapse) + "mSec.");
 	}
 
-	
+	/**
+	 * 結果グラフの枠線を描画する。
+	 * @param ctx コンテキスト
+	 */
 	public static void drawGraphBase(Context2d ctx){
 		GWT.log("[Resultpanel:drawGraphBase()] start");
-		ctx.setStrokeStyle(Utils.COLOR_BLACK);
+		ctx.setStrokeStyle(COLOR_BLACK);
 		ctx.fillRect(0, 0, 400, 400);
-		ctx.setStrokeStyle(Utils.COLOR_GRAY);
+		ctx.setStrokeStyle(COLOR_GRAY);
 		ctx.setGlobalAlpha(0.7D);
 		ctx.strokeRect(0, 0,50, 50);
 		ctx.strokeRect(0, 50,50, 50);
@@ -183,7 +198,7 @@ public class ResultPanel extends VerticalPanel implements TextConst, HTMLConst{
 		
 		ctx.beginPath();
 		ctx.setGlobalAlpha(1D);
-		ctx.setStrokeStyle(Utils.COLOR_WHITE);
+		ctx.setStrokeStyle(COLOR_WHITE);
 		ctx.moveTo(200,0);
 		ctx.lineTo(200, 400);
 		ctx.moveTo(0, 200);
@@ -192,16 +207,16 @@ public class ResultPanel extends VerticalPanel implements TextConst, HTMLConst{
 		ctx.setGlobalAlpha(1D);
 
 		ctx.beginPath();
-		ctx.setFont(Utils.FONTTYPE_TYPE);
-		ctx.setStrokeStyle(Utils.COLOR_WHITE);
-		ctx.strokeText(Utils.TYPE_SOLD, 343,  18);
-		ctx.strokeText(Utils.TYPE_KING,   0,  18);
-		ctx.strokeText(Utils.TYPE_CRFT,   0, 395);
-		ctx.strokeText(Utils.TYPE_SCHO, 343, 395);
+		ctx.setFont(FONTTYPE_TYPE);
+		ctx.setStrokeStyle(COLOR_WHITE);
+		ctx.strokeText(TYPE_SOLD, 343,  18);
+		ctx.strokeText(TYPE_KING,   0,  18);
+		ctx.strokeText(TYPE_CRFT,   0, 395);
+		ctx.strokeText(TYPE_SCHO, 343, 395);
 		ctx.stroke();
 		ctx.beginPath();
-		ctx.setFont(Utils.FONTTYPE_NUM);
-		ctx.setStrokeStyle(Utils.COLOR_WHITE);
+		ctx.setFont(FONTTYPE_NUM);
+		ctx.setStrokeStyle(COLOR_WHITE);
 		ctx.strokeText("-24",   0, 200);
 		ctx.strokeText( "40", 200,   8);
 		ctx.strokeText("-40", 200, 400);
@@ -210,6 +225,11 @@ public class ResultPanel extends VerticalPanel implements TextConst, HTMLConst{
 		ctx.stroke();
 	}
 
+	/**
+	 * 過去の履歴を結果グラフへ書き込む。
+	 * @param ctx コンテキスト
+	 * @param coordinates 結果(long[])が格納されたリスト
+	 */
 	private static void writeGrayPoints(
 			Context2d ctx, List<long[]> coordinates){
 		int pos=0;
@@ -223,6 +243,11 @@ public class ResultPanel extends VerticalPanel implements TextConst, HTMLConst{
 		}
 	}
 	
+	/**
+	 * グレーの色合いを文字列で取得する。
+	 * @param pos 位置
+	 * @return グレーを表す文字列
+	 */
 	private static String getGray(int pos){
 		int point = 255 - pos;
 		if(point<0) point=0;
@@ -238,6 +263,14 @@ public class ResultPanel extends VerticalPanel implements TextConst, HTMLConst{
 		return color.toString();
 	}
 
+	/**
+	 * 点を結果グラフへ書き込む
+	 * @param ctx コンテキスト
+	 * @param x X座標
+	 * @param y Y座標
+	 * @param radius 半径
+	 * @param color 色
+	 */
 	private static void writePoint(
 			Context2d ctx, int x, int y, int radius, 
 			String color){
@@ -251,6 +284,9 @@ public class ResultPanel extends VerticalPanel implements TextConst, HTMLConst{
 				yCoord + ", rad=" + radius + ", color=" + color);
 	}
 	
+	/**
+	 * サマリを書き込む
+	 */
 	private void drawSummary(){
 		GWT.log("[ResultPanel#drawSummary()] start");
 		// サーバへサマリ情報を要求する
@@ -291,28 +327,28 @@ public class ResultPanel extends VerticalPanel implements TextConst, HTMLConst{
 						return Integer.toString(sum.getKing());
 					}
 				};
-				statTbl.addColumn(kingCol, Utils.TYPE_KING);
+				statTbl.addColumn(kingCol, TYPE_KING);
 				TextColumn<Summary> soldCol = new TextColumn<Summary>(){
 					@Override
 					public String getValue(Summary sum) {
 						return Integer.toString(sum.getSolder());
 					}
 				};
-				statTbl.addColumn(soldCol, Utils.TYPE_SOLD);
+				statTbl.addColumn(soldCol, TYPE_SOLD);
 				TextColumn<Summary> schoCol = new TextColumn<Summary>(){
 					@Override
 					public String getValue(Summary sum) {
 						return Integer.toString(sum.getScholar());
 					}
 				};
-				statTbl.addColumn(schoCol, Utils.TYPE_SCHO);
+				statTbl.addColumn(schoCol, TYPE_SCHO);
 				TextColumn<Summary> crftCol = new TextColumn<Summary>(){
 					@Override
 					public String getValue(Summary sum) {
 						return Integer.toString(sum.getCraftsman());
 					}
 				};
-				statTbl.addColumn(crftCol, Utils.TYPE_CRFT);
+				statTbl.addColumn(crftCol, TYPE_CRFT);
 				TextColumn<Summary> othrCol = new TextColumn<Summary>(){
 					@Override
 					public String getValue(Summary sum) {

@@ -1,5 +1,8 @@
 package jp.freeex.fourtypes.client.q;
-
+/**
+ * 質問クラス
+ * @author tasuku
+ */
 public class Question {
 	/**
 	 * 設問

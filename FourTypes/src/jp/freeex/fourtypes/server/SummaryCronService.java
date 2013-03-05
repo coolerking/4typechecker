@@ -8,11 +8,14 @@ import javax.jdo.Transaction;
 
 
 import jp.freeex.fourtypes.shared.Summary;
-
+/**
+ * サマリをDBへ書き込むcronサービス。
+ * @author tasuku
+ */
 public class SummaryCronService extends BaseCronService {
 
 	/**
-	 * 
+	 * シリアルバージョンUID
 	 */
 	private static final long serialVersionUID = -6364330515499150464L;
 	
@@ -22,6 +25,9 @@ public class SummaryCronService extends BaseCronService {
 	private static Logger log = 
 			Logger.getLogger(SummaryCronService.class.getName());
 
+	/**
+	 * キャッシュ上のサマリをDBへ書き込む。
+	 */
 	@Override
 	public void execute() {
 		long elapse = System.currentTimeMillis();

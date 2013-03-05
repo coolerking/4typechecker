@@ -2,6 +2,7 @@ package jp.freeex.fourtypes.client;
 
 
 import jp.freeex.fourtypes.client.widget.TopButtonPanel;
+import jp.freeex.fourtypes.shared.Const;
 import jp.freeex.fourtypes.shared.Utils;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -11,13 +12,15 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
- * Entry point classes define <code>onModuleLoad()</code>.
+ * 4タイプ判定テストのエントリポイントとなるクラス。
+ * @author tasuku
  */
-public class FourTypes implements EntryPoint, TextConst {
+public class FourTypes implements EntryPoint, Const {
 
 
 	/**
-	 * This is the entry point method.
+	 * 最初に呼び出されるメソッド。
+	 * トップページを描画し、ボタン用ハンドラを登録する。
 	 */
 	public void onModuleLoad() {
 		long elapse = System.currentTimeMillis();
@@ -38,6 +41,7 @@ public class FourTypes implements EntryPoint, TextConst {
 
 		RootPanel.get(Utils.HTMLID_MAIN).clear();
 
+		// ボタン押下後の処理は本クラス内に実装
 		TopButtonPanel topButs = new TopButtonPanel();
 		RootPanel.get(Utils.HTMLID_BUTTONS).clear();
 		RootPanel.get(Utils.HTMLID_BUTTONS).add(topButs);

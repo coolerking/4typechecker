@@ -4,7 +4,12 @@ import java.util.List;
 
 import jp.freeex.fourtypes.client.q.Question;
 import jp.freeex.fourtypes.client.q.QuestionManager;
-
+/**
+ * 理想／法則テスト本文パネル。
+ * 理想／法則テスト固有の処理のみ実装しており、主要な処理は親クラス<code>QuestionPanel</code>
+ * 上に存在する。
+ * @author tasuku
+ */
 public class IntrovertTestPanel extends BaseTestPanel {
 
 	/**

@@ -1,8 +1,8 @@
 package jp.freeex.fourtypes.client.widget;
 
 import jp.freeex.fourtypes.client.ClientUtils;
-import jp.freeex.fourtypes.client.TextConst;
 import jp.freeex.fourtypes.client.q.Question;
+import jp.freeex.fourtypes.shared.Const;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -11,11 +11,24 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RadioButton;
-
-public class QuestionTable extends FlexTable implements TextConst{
+/**
+ * 質問テーブルクラス。
+ * @author tasuku
+ */
+public class QuestionTable extends FlexTable implements Const{
+	/**
+	 * スコア
+	 */
 	private int score = 0;
+	/**
+	 * 回答用の５つのラジオボタン
+	 */
 	private RadioButton[] radios = new RadioButton[5];
 
+	/**
+	 * 唯一のコンストラクタ。
+	 * @param question　質問クラス
+	 */
 	public QuestionTable(Question question){
 		String statement = question.getStatement();
 		String upperAns = question.getUpperAnswer();
@@ -88,7 +101,14 @@ public class QuestionTable extends FlexTable implements TextConst{
 		HTML newLine = new HTML(ClientUtils.getNewLine());
 		this.setWidget(6, 0, newLine);
 	}
+	/**
+	 * スコアを取得する。
+	 * @return スコア
+	 */
 	public int getScore(){ return score; }
+	/**
+	 * すべての回答を中間位置にもどし、スコアを0にする。
+	 */
 	public void clear(){
 		radios[0].setValue(false);
 		radios[1].setValue(false);
