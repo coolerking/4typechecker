@@ -9,11 +9,14 @@ import javax.jdo.Transaction;
 
 import jp.freeex.fourtypes.shared.Result;
 import jp.freeex.fourtypes.shared.Results;
-
+/**
+ * 結果群をDBへ書き込むcronサービス
+ * @author tasuku
+ */
 public class ResultsCronService extends BaseCronService {
 
 	/**
-	 * 
+	 * シリアルバージョンUID
 	 */
 	private static final long serialVersionUID = 2394788072302421023L;
 
@@ -23,6 +26,10 @@ public class ResultsCronService extends BaseCronService {
 	private static Logger log = 
 			Logger.getLogger(ResultsCronService.class.getName());
 
+	/**
+	 * memcache上の結果群をすべてDBへ書き込む。
+	 * キャッシュ自体はクリアしない。
+	 */
 	@Override
 	public void execute() {
 		long elapse = System.currentTimeMillis();
@@ -40,14 +47,17 @@ public class ResultsCronService extends BaseCronService {
 			pm = pmf.getPersistenceManager();
 			Transaction tx = pm.currentTransaction();
 			try{
-				tx.begin();
 				for(Result r: resultList){
-					pm.makePersistent(r);
+					tx.begin();
 					log.info("[ResultsCronService#execute()] " +
-							"insert result : " + r);
+							"insert result list (pre): " + r);
+					pm.makePersistentAll(r);
+					log.info("[ResultsCronService#execute()] " +
+							"insert result (post): " + resultList.size());
+					tx.commit();
+					
+					log.info("[ResultsCronService#execute()] commited");
 				}
-				tx.commit();
-				log.info("[ResultsCronService#execute()] commited");
 				StatisticsManager.getInstance().clearResults();
 			}finally{
 				if(tx!=null&&tx.isActive()) tx.rollback();

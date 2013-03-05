@@ -21,11 +21,15 @@ import net.sf.jsr107cache.CacheFactory;
 import net.sf.jsr107cache.CacheManager;
 
 import com.google.appengine.api.memcache.jsr107cache.GCacheFactory;
-
+/**
+ * 統計管理クラス。サーバ側処理の中心となるクラス。
+ * @author hori
+ *
+ */
 public class StatisticsManager implements Serializable {
 
 	/**
-	 * 
+	 * シリアルバージョンUID
 	 */
 	private static final long serialVersionUID = 6784614482129795557L;
 	/**
@@ -34,20 +38,40 @@ public class StatisticsManager implements Serializable {
 	private static final Logger log = 
 			Logger.getLogger(StatisticsManager.class.getName());
 	
+	/**
+	 * キャッシュネームスペース
+	 */
 	private static final String C_NAMESPACE = "fourtypes";
+	/**
+	 * キャッシュ名
+	 */
 	private static final String C_NAME = C_NAMESPACE;
-	private static final String C_TIMEOUT = "10830";
+	/**
+	 * タイムアウト
+	 */
+//	private static final String C_TIMEOUT = "10830";
+	/**
+	 * キャッシュキー：結果
+	 */
 	private static final String C_KEY_RESULTS = "results";
+	/**
+	 * キャッシュキー：サマリ
+	 */
 	private static final String C_KEY_SUMMARY = "summary";
 	
-	
+	/**
+	 * 統計管理クラスインスタンス
+	 */
 	private static StatisticsManager manager = new StatisticsManager();
 	
-	
+	/**
+	 * 唯一のコンストラクタ（外部呼び出し不可）。
+	 * キャッシュを初期化する。
+	 */
 	private StatisticsManager(){
 		Map<String, String> props = new HashMap<String, String>();
 		props.put(GCacheFactory.NAMESPACE, C_NAMESPACE);
-		props.put(GCacheFactory.EXPIRATION_DELTA, C_TIMEOUT);
+//		props.put(GCacheFactory.EXPIRATION_DELTA, C_TIMEOUT);
 		CacheManager cMan = CacheManager.getInstance();
 		props.put("name", C_NAME);
 		try{
@@ -60,11 +84,18 @@ public class StatisticsManager implements Serializable {
 			
 		}
 	}
-	
+	/**
+	 * 統計管理クラスインスタンスを取得する。
+	 * @return 統計管理クラスインスタンス
+	 */
 	public static final StatisticsManager getInstance(){
 		return manager;
 	}
 	
+	/**
+	 * DBからサマリを取得する。
+	 * @return サマリ
+	 */
 	private Summary retrieveSummary(){
 		long elapse = System.currentTimeMillis();
 		log.info("[StatisticsManager#retrieveSummary()] start");
@@ -105,7 +136,12 @@ public class StatisticsManager implements Serializable {
 				(System.currentTimeMillis() - elapse) + "mSec.");
 		return summary;
 	}
-	
+	/**
+	 * 結果をキャッシュへ書き込む。
+	 * @param x X座標
+	 * @param y Y座標
+	 * @param evaluatedAt　評価日時
+	 */
 	public void setResult(int x, int y, Date evaluatedAt){
 		long elapse = System.currentTimeMillis();
 		log.info("[StatisticsManager#setResult()] (x,y)=(" + x +", " + y +")");
@@ -146,7 +182,10 @@ public class StatisticsManager implements Serializable {
 		log.info("[StatisticsManager#setResult()] end" +
 				(System.currentTimeMillis() - elapse) + "mSec.");
 	}
-	
+	/**
+	 * キャッシュ上の結果群を取得する。
+	 * @return 結果群
+	 */
 	public Results getResults(){
 		long elapse = System.currentTimeMillis();
 		log.info("[StatisticsManager#getResults()] start");
@@ -163,7 +202,10 @@ public class StatisticsManager implements Serializable {
 		return results;
 		
 	}
-	
+	/**
+	 * サマリをキャッシュから取得する。
+	 * @return サマリ
+	 */
 	public Summary getSummary(){
 		long elapse = System.currentTimeMillis();
 		log.info("[StatisticsManager#getSummary()] start");
@@ -184,7 +226,9 @@ public class StatisticsManager implements Serializable {
 				(System.currentTimeMillis() - elapse) + "mSec.");
 		return summary;
 	}
-	
+	/**
+	 * キャッシュ上の結果をすべてクリアする。
+	 */
 	public void clearResults(){
 		long elapse = System.currentTimeMillis();
 		log.info("[StatisticsManager#clearResults()] start");

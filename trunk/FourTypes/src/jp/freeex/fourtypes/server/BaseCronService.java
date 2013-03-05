@@ -1,18 +1,17 @@
 package jp.freeex.fourtypes.server;
 
-import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jp.freeex.fourtypes.shared.HTMLConst;
-
-public abstract class BaseCronService extends HttpServlet implements HTMLConst{
+import jp.freeex.fourtypes.shared.Const;
+/**
+ * cronサービスの基底クラス。
+ * @author tasuku
+ */
+public abstract class BaseCronService extends HttpServlet implements Const{
 
 	/**
 	 * シリアルバージョンUID
@@ -25,15 +24,28 @@ public abstract class BaseCronService extends HttpServlet implements HTMLConst{
 	private static Logger log = 
 			Logger.getLogger(BaseCronService.class.getName());
 
+	/**
+	 * cron処理を実装する。
+	 */
 	public abstract void execute();
 	
+	/**
+	 * IPアドレスが国内かどうか判別する
+	 * @param req リクエスト
+	 * @return 真：国内or0.1.0.1、偽：それ以外（海外）
+	 */
 	private boolean checkIpAddress(HttpServletRequest req){
 		String ip = req.getRemoteAddr();
 		return ServerUtils.isJapaneseIP(ip);
 	}
 	
+	/**
+	 * GETメソッド受領時処理。IPアドレスチェック後execute()を呼び出す。
+	 * @param req リクエスト
+	 * @param resp レスポンス
+	 */
 	@Override
-	public void doGet(HttpServletRequest req, HttpServletResponse resp){
+	public final void doGet(HttpServletRequest req, HttpServletResponse resp){
 		if(checkIpAddress(req)){
 			execute();
 		}else{
@@ -42,6 +54,11 @@ public abstract class BaseCronService extends HttpServlet implements HTMLConst{
 		}
 	}
 	
+	/**
+	 * POSTメソッド受領時処理。IPアドレスチェック後execute()を呼び出す。
+	 * @param req リクエスト
+	 * @param resp レスポンス
+	 */
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp){
 		if(checkIpAddress(req)){
@@ -49,30 +66,6 @@ public abstract class BaseCronService extends HttpServlet implements HTMLConst{
 		}else{
 			log.info("[BaseCronService#doPost()] ignore access/out of range :" + 
 					req.getRemoteAddr());
-		}
-	}
-	
-	/**
-	 * リダイレクトへ進む
-	 * @param jspName JSP名
-	 * @param req リクエスト
-	 * @param resp レスポンス
-	 */
-	void sendRedirect(String jspName, HttpServletRequest req, 
-			HttpServletResponse resp){
-		ServletContext context = getServletContext();
-		RequestDispatcher rd = context.getRequestDispatcher(jspName);
-		try {
-			rd.forward(req, resp);
-		} catch (Exception e) {
-			log.log(Level.WARNING, "[BaseCronService] exception occured", e);
-			try {
-				resp.sendRedirect(URL_SORRY);
-			} catch (IOException ioe) {
-				log.log(Level.WARNING, 
-						"[BaseCronService] exception occured while sending " +
-						"sorry page", e);
-			}
 		}
 	}
 }

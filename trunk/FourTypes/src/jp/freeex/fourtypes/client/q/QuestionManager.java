@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.freeex.fourtypes.client.ClientUtils;
-
+/**
+ * 質問管理クラス。
+ * @author tasuku
+ */
 public class QuestionManager {
 
 	/**

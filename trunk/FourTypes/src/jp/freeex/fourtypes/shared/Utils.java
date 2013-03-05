@@ -4,67 +4,48 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * サーバ、クライアント両方で使用可能なユーティリティクラス。
+ * @author tasuku
+ */
+public class Utils implements Const{
 
-public class Utils {
 	/**
-	 * HTML ID: サブタイトル
+	 * 注目型かどうか判別する
+	 * @param x X座標
+	 * @param y Y座標
+	 * @return boolean 真：注目型、偽：以外
 	 */
-	public static final String HTMLID_SUBTITLE = "subtitle";
-	/**
-	 * HTML ID: 説明
-	 */
-	public static final String HTMLID_DIRECTION = "direction";
-	/**
-	 * HTML ID: 本文
-	 */
-	public static final String HTMLID_MAIN = "main";
-	/**
-	 * HTML ID: ボタン領域
-	 */
-	public static final String HTMLID_BUTTONS = "buttons";
-	/**
-	 * HTML ID: フッタ
-	 */
-	public static final String HTMLID_FOOTER = "footer";
-	
-
-	public static final String TYPE_KING = "注目型";
-	public static final String TYPE_SOLD = "司令型";
-	public static final String TYPE_SCHO = "法則型";
-	public static final String TYPE_CRFT = "理想型";
-	public static final String TYPE_EXTR = "外交的行動型(注目と司令の中間)";
-	public static final String TYPE_INTR = "内向的行動型(法則と理想の中間)";
-	public static final String TYPE_REAL = "現実的思考型(司令と法則の中間)";
-	public static final String TYPE_ABST = "抽象的思考型(注目と理想の中間)";
-	public static final String TYPE_ZERO = 
-			"均衡型(外向/内向性と現実/理想的思考が均衡)";
-	
-	public static final String TYPECOLOR_KING = "yellow";
-	public static final String TYPECOLOR_SOLD = "blue";
-	public static final String TYPECOLOR_SCHO = "green";
-	public static final String TYPECOLOR_CRFT = "red";
-	public static final String TYPECOLOR_OTHR = "white";
-	
-	public static final String COLOR_WHITE = TYPECOLOR_OTHR;
-	public static final String COLOR_BLACK = "black";
-	public static final String COLOR_GRAY = "rgb(91, 91, 91)";
-	
-	public static final String FONTTYPE_TYPE = "18px 'ＭＳ　Ｐゴシック'";
-	public static final String FONTTYPE_NUM = "9px 'ＭＳ　Ｐゴシック'";
-
 	public static boolean isKing(int x, int y){
 		return (y>0 && x<0);
 	}
+	/**
+	 * 司令型かどうか判別する
+	 * @param x X座標
+	 * @param y Y座標
+	 * @return boolean 真：司令型、偽：以外
+	 */
 	public static boolean isSolder(int x, int y){
 		return (y>0 && x>0);
 	}
+	/**
+	 * 法則型かどうか判別する
+	 * @param x X座標
+	 * @param y Y座標
+	 * @return boolean 真：法則型、偽：以外
+	 */
 	public static boolean isScholar(int x, int y){
 		return (y<0 && x>0);
 	}
 	public static boolean isCraftsman(int x, int y){
 		return (y<0 && x<0);
 	}
-	
+	/**
+	 * タイプを取得する
+	 * @param firstScore　向性テストスコア
+	 * @param secondScore 注目/司令テストor法則/理想テストスコア
+	 * @return タイプ
+	 */
 	public static String getType(int firstScore, int secondScore){
 		int x = secondScore;
 		int y = firstScore;
@@ -82,7 +63,12 @@ public class Utils {
 			else return TYPE_ZERO;
 		}
 	}
-	
+	/**
+	 * タイプ色を取得する
+	 * @param firstScore　向性テストスコア
+	 * @param secondScore 注目/司令テストor法則/理想テストスコア
+	 * @return タイプ色
+	 */
 	public static String getTypeColor(int firstScore, int secondScore){
 		int x = secondScore;
 		int y = firstScore;
@@ -99,6 +85,14 @@ public class Utils {
 		}
 	}
 
+	/**
+	 * サマリを加算する。
+	 * @param x X座標
+	 * @param y Y座標
+	 * @param evaluatedAt 評価日時
+	 * @param sum 加算前のサマリ
+	 * @return 加算後のサマリ
+	 */
 	public static Summary add(int x, int y, Date evaluatedAt, Summary sum){
 		if(sum==null) sum = new Summary();
 		sum.setTotal(sum.getTotal()+1);
@@ -109,6 +103,12 @@ public class Utils {
 		return sum;
 	}
 
+	/**
+	 * セパレータ文字列で分割する。
+	 * @param separator セパレータ文字列
+	 * @param original 対象文字列
+	 * @return　分割された結果
+	 */
 	public static List<String> split2List(String separator, String original){
 		List<String> ret = new ArrayList<String>();
 		String org = new String(original);
@@ -125,6 +125,12 @@ public class Utils {
 		return ret;
 	}
 
+	/**
+	 * セパレータ文字列で分割する。
+	 * @param separator セパレータ文字列
+	 * @param original 対象文字列
+	 * @return　分割された結果
+	 */
 	public static String[] split2Array(String separator, String original){
 		List<String> elements = Utils.split2List(separator, original);
 		String[] ret = new String[elements.size()];

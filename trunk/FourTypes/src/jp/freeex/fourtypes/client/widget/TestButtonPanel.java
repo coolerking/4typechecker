@@ -6,7 +6,7 @@ import jp.freeex.fourtypes.client.ClientUtils;
 import jp.freeex.fourtypes.client.FourTypes;
 import jp.freeex.fourtypes.client.StatisticsService;
 import jp.freeex.fourtypes.client.StatisticsServiceAsync;
-import jp.freeex.fourtypes.client.TextConst;
+import jp.freeex.fourtypes.shared.Const;
 import jp.freeex.fourtypes.shared.Utils;
 
 import com.google.gwt.core.client.GWT;
@@ -20,8 +20,12 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
-
-public class TestButtonPanel extends HorizontalPanel implements TextConst{
+/**
+ * テスト画面のボタン群部分を提供する。
+ * すべてのテストパネル共通で、向性テスト用、それ以外用のコンストラクタ呼び出しで使い分ける。
+ * @author tasuku
+ */
+public class TestButtonPanel extends HorizontalPanel implements Const{
 	/**
 	 * 次へボタン
 	 */
@@ -198,57 +202,69 @@ public class TestButtonPanel extends HorizontalPanel implements TextConst{
 				(System.currentTimeMillis() - elapse) + "mSec.");
 	}
 	
+	/**
+	 * 注目／司令型テスト画面を構成する。
+	 * @param y Y座標
+	 */
 	public void showExtrovertTestPage(int y){
 		// 注目／司令テストサブタイトル変更
 		final Label subtitle = new Label(SUBT_2ND_EXT);
-		RootPanel.get(Utils.HTMLID_SUBTITLE).clear();
-		RootPanel.get(Utils.HTMLID_SUBTITLE).add(subtitle);
+		RootPanel.get(HTMLID_SUBTITLE).clear();
+		RootPanel.get(HTMLID_SUBTITLE).add(subtitle);
 		GWT.log("[TestButtonPanel:showExtrovertTestPage()] added 2nd " +
 				"subtitle(ext)");
 
 		// 注目／司令テスト本体パネル変更
 		final BaseTestPanel ePanel = new ExtrovertTestPanel();
-		RootPanel.get(Utils.HTMLID_MAIN).clear();
-		RootPanel.get(Utils.HTMLID_MAIN).add(ePanel);
+		RootPanel.get(HTMLID_MAIN).clear();
+		RootPanel.get(HTMLID_MAIN).add(ePanel);
 		GWT.log("[TestButtonPanel:showExtrovertTestPage()] added 2nd " +
 				"body(ext)");
 
 		// 注目／司令テストボタン群変更
 		final TestButtonPanel ebPanel = 
 				new TestButtonPanel(y, ePanel); // for 2nd
-		RootPanel.get(Utils.HTMLID_BUTTONS).clear();
-		RootPanel.get(Utils.HTMLID_BUTTONS).add(ebPanel);
+		RootPanel.get(HTMLID_BUTTONS).clear();
+		RootPanel.get(HTMLID_BUTTONS).add(ebPanel);
 		GWT.log("[TestButtonPanel:showExtrovertTestPage()] added 2nd " +
 				"button panel(ext)");
 
 
 	}
 	
+	/**
+	 * 法則／理想型テスト画面を構成する。
+	 * @param y Y座標
+	 */
 	public void showIntrovertTestPage(int y){
 		// 理想／法則テストサブタイトル変更
-		final Label subtitle = new Label("法則型・理想型テスト");
-		RootPanel.get(Utils.HTMLID_SUBTITLE).clear();
-		RootPanel.get(Utils.HTMLID_SUBTITLE).add(subtitle);
+		final Label subtitle = new Label(SUBT_2ND_INT);
+		RootPanel.get(HTMLID_SUBTITLE).clear();
+		RootPanel.get(HTMLID_SUBTITLE).add(subtitle);
 		GWT.log("[TestButtonPanel:showIntrovertTestPage()] added 2nd " +
 				"subtitle(int)");
 
 		// 理想／法則テスト本体パネル変更
 		final BaseTestPanel iPanel = new IntrovertTestPanel();
-		RootPanel.get(Utils.HTMLID_MAIN).clear();
-		RootPanel.get(Utils.HTMLID_MAIN).add(iPanel);
+		RootPanel.get(HTMLID_MAIN).clear();
+		RootPanel.get(HTMLID_MAIN).add(iPanel);
 		GWT.log("[TestButtonPanel:showIntrovertTestPage()] added 2nd " +
 				"body(int)");
 
 		// 理想／法則テストボタン群変更
 		final TestButtonPanel ibPanel = 
 				new TestButtonPanel(y, iPanel); // for 2nd
-		RootPanel.get(Utils.HTMLID_BUTTONS).clear();
-		RootPanel.get(Utils.HTMLID_BUTTONS).add(ibPanel);
+		RootPanel.get(HTMLID_BUTTONS).clear();
+		RootPanel.get(HTMLID_BUTTONS).add(ibPanel);
 		GWT.log("[TestButtonPanel:showIntrovertTestPage()] added 2nd " +
 				"button panel(int)");
 
 	}
-	
+	/**
+	 * 結果パネルを構成する。
+	 * @param x X座標
+	 * @param y Y座標
+	 */
 	public void showResultPage(int x, int y){
 		// サブタイトル変更
 		final HTML subtitle = 
@@ -258,8 +274,8 @@ public class TestButtonPanel extends HorizontalPanel implements TextConst{
 						"\">" +
 						ClientUtils.getTypeWithLink(y, x) +
 						"</font>" + SUBT_RESULT_SUFFIX +"</b></font>");
-		RootPanel.get(Utils.HTMLID_SUBTITLE).clear();
-		RootPanel.get(Utils.HTMLID_SUBTITLE).add(subtitle);
+		RootPanel.get(HTMLID_SUBTITLE).clear();
+		RootPanel.get(HTMLID_SUBTITLE).add(subtitle);
 		GWT.log("[TestButtonPanel:2nd-con>NEXT:onClick()]  added " +
 				"result subtitle(type)");
 
@@ -268,14 +284,14 @@ public class TestButtonPanel extends HorizontalPanel implements TextConst{
 				new HTML(DIRC_RESULT_PREFIX + 
 						ClientUtils.getTypeWithLink(y, x, DIRC_RESULT_BODY) + 
 						DIRC_RESULT_SUFFIX);
-		RootPanel.get(Utils.HTMLID_DIRECTION).clear();
-		RootPanel.get(Utils.HTMLID_DIRECTION).add(resultDirection);
+		RootPanel.get(HTMLID_DIRECTION).clear();
+		RootPanel.get(HTMLID_DIRECTION).add(resultDirection);
 		GWT.log("[TestButtonPanel:2nd-con>NEXT:onClick()]  added " +
 				"result direction");
 
 		// 本体パネル変更
-		RootPanel.get(Utils.HTMLID_MAIN).clear();
-		RootPanel.get(Utils.HTMLID_MAIN).add(new ResultPanel(x, y));
+		RootPanel.get(HTMLID_MAIN).clear();
+		RootPanel.get(HTMLID_MAIN).add(new ResultPanel(x, y));
 		GWT.log("[TestButtonPanel:2nd-con>NEXT:onClick()] added " +
 				"result body");
 
@@ -301,13 +317,18 @@ public class TestButtonPanel extends HorizontalPanel implements TextConst{
 						"mSec.");
 			} // end of onClick(): result retry
 		}); // end of addClickHandler() result retry
-		RootPanel.get(Utils.HTMLID_BUTTONS).clear();
-		RootPanel.get(Utils.HTMLID_BUTTONS).add(restart);
+		RootPanel.get(HTMLID_BUTTONS).clear();
+		RootPanel.get(HTMLID_BUTTONS).add(restart);
 		GWT.log("[TestButtonPanel:2nd-con>NEXT:onClick()] added " +
 				"result button(retry)");
 
 	}
 	
+	/**
+	 * 結果をサーバへ送信する。
+	 * @param x X座標
+	 * @param y Y座標
+	 */
 	public void sendResult(int x, int y){
 		//キャッシュへ結果を書き込む
 		final StatisticsServiceAsync service =

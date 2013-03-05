@@ -8,12 +8,15 @@ import jp.freeex.fourtypes.client.StatisticsService;
 import jp.freeex.fourtypes.shared.Summary;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-
+/**
+ * 統計サービスの実装クラス。
+ * @author tasuku
+ */
 public class StatisticsServiceImpl extends RemoteServiceServlet implements
 		StatisticsService {
 
 	/**
-	 * 
+	 * シリアルバージョンUID
 	 */
 	private static final long serialVersionUID = 483984716288216511L;
 	/**
@@ -22,6 +25,12 @@ public class StatisticsServiceImpl extends RemoteServiceServlet implements
 	private static final Logger log = 
 			Logger.getLogger(StatisticsServiceImpl.class.getName());
 
+	/**
+	 * 結果をキャッシュへ格納する。
+	 * @param x X座標
+	 * @param y Y座標
+	 * @param evaluatedAt　計測日時
+	 */
 	@Override
 	public void setResult(int x, int y, Date evaluatedAt) {
 		long elapse = System.currentTimeMillis();
@@ -34,6 +43,10 @@ public class StatisticsServiceImpl extends RemoteServiceServlet implements
 		}
 	}
 
+	/**
+	 * サマリをキャッシュから取得する。
+	 * @return Summary サマリ
+	 */
 	@Override
 	public Summary getSummary() {
 		long elapse = System.currentTimeMillis();
@@ -46,6 +59,10 @@ public class StatisticsServiceImpl extends RemoteServiceServlet implements
 		}
 	}
 
+	/**
+	 * 結果群をキャッシュから取得する。
+	 * @return List<long[]> long[]は3つの要素を持つ。0:X座標、1:Y座標、2:計測日時(mSec)
+	 */
 	@Override
 	public List<long[]> getResults() {
 		long elapse = System.currentTimeMillis();
