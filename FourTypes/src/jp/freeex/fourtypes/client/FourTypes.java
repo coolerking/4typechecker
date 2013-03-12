@@ -46,9 +46,12 @@ public class FourTypes implements EntryPoint, Const {
 		RootPanel.get(Utils.HTMLID_BUTTONS).clear();
 		RootPanel.get(Utils.HTMLID_BUTTONS).add(topButs);
 
-		HTML footer = new HTML(ClientUtils.getAboutFourType() +
+		HTML footer = new HTML(ClientUtils.getAboutEachTypes() +
 				ClientUtils.getNewLine() +
-				ClientUtils.getAboutEachTypes());
+				ClientUtils.getNewLine() +
+				ClientUtils.getNewLine() +
+				ClientUtils.getNewLine() +
+				ClientUtils.getAboutFourType() );
 		RootPanel.get(Utils.HTMLID_FOOTER).clear();
 		RootPanel.get(Utils.HTMLID_FOOTER).add(footer);
 
