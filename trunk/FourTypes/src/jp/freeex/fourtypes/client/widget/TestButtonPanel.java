@@ -49,7 +49,7 @@ public class TestButtonPanel extends HorizontalPanel implements Const{
 	 * @param handler クリアボタン用クリックハンドラ
 	 */
 	protected void addClearClickHandler(ClickHandler handler){
-		nextButton.addClickHandler(handler);
+		clearButton.addClickHandler(handler);
 	}
 	
 	/**
@@ -122,6 +122,7 @@ public class TestButtonPanel extends HorizontalPanel implements Const{
 			@Override
 			public void onClick(ClickEvent event) {
 				tropismPanel.clear();
+				Window.scrollTo(0, 0);
 				GWT.log("[QuestionButtonPanel:1st:constructor:NEXT:" +
 						"onClick()] clear 1st test answers");
 			}
@@ -165,6 +166,7 @@ public class TestButtonPanel extends HorizontalPanel implements Const{
 				// スコアが均衡している場合は、アラートダイアログを表示する
 				if(x==0){
 					Window.alert(MSG_2ND_EVEN);
+					Window.scrollTo(0, 0);
 					GWT.log("[TestButtonPanel:2nd-con>NEXT:onClick()] " +
 							"end: " + 
 							(System.currentTimeMillis() - elapseNext) + 
@@ -193,6 +195,7 @@ public class TestButtonPanel extends HorizontalPanel implements Const{
 			@Override
 			public void onClick(ClickEvent event) {
 				secondTestPanel.clear();
+				Window.scrollTo(0, 0);
 				GWT.log("[TestButtonPanel:2nd-con>CLEAR:onClick()] " +
 						"clear 2nd test result");
 			}
