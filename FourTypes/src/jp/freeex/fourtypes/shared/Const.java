@@ -184,7 +184,7 @@ public interface Const {
  	/**
  	 * トップページ
  	 */
-	public static final String SUBT_TOP = "トップページ";
+	public static final String SUBT_TOP = "";
 	/**
 	 * 1ページ目テスト
 	 */
