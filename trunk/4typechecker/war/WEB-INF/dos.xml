@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blacklistentries>
 	<blacklist>
+	<subnet>2.0.0.1</subnet>
+	<description>dummy</description>
+	</blacklist>
+<!-- comment out 2013/03/14
+	<blacklist>
 	<subnet>2.0.0.0/8</subnet>
 	<description>www.cgis.biz/tools/access/ not japan omit</description>
 	</blacklist>
@@ -400,4 +405,5 @@
 	<subnet>151.0.0.0/8</subnet>
 	<description>www.cgis.biz/tools/access/ not japan omit</description>
 	</blacklist>
+-->
 </blacklistentries>
