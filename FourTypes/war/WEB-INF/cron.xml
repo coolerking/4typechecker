@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+	<cron>
+		<url>/cron/results</url>
+		<description>Write results from cache</description>
+		<schedule>every 55 minutes</schedule>
+	</cron>
+	<cron>
+		<url>/cron/summary</url>
+		<description>Write summary from cache</description>
+		<schedule>every 58 minutes</schedule>
+	</cron>
+</cronentries>

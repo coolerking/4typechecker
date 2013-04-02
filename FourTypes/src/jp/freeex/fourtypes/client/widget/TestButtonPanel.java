@@ -162,6 +162,11 @@ public class TestButtonPanel extends HorizontalPanel implements Const{
 				GWT.log("[TestButtonPanel:2nd-con>NEXT:onClick()] start");
 				// 注目／司令テスト用本体パネルからスコアを集計する
 				int x = secondTestPanel.getScore();
+				if(secondTestPanel instanceof ExtrovertTestPanel){
+					x = x*(-1);
+					GWT.log("[TestButtonPanel:2nd-con>NEXT:onClick()]" +
+							"extrovert -> inverse x to=" + x);
+				}
 
 				// スコアが均衡している場合は、アラートダイアログを表示する
 				if(x==0){
@@ -173,7 +178,7 @@ public class TestButtonPanel extends HorizontalPanel implements Const{
 							"mSec.");
 					return;
 				}
-				
+
 				// 結果をサーバへ送信
 				sendResult(x, y);
 
